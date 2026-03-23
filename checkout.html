@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Redesign — Anatolie Micaliuc</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon.png">
+
+    <style>
+        @font-face {
+            font-family: 'EditorialNew';
+            src: url('./fonts/EditorialNew-Variable.woff2') format('woff2');
+            font-weight: 100 900;
+            font-style: normal;
+        }
+
+        /* Case study page overrides & additions */
+
+        .case-label {
+            display: inline-block;
+            font-size: 18px;
+            background-color: #FFECE6;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: #EE5324;
+            margin-top: 60px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .nav-links {
+            display: flex !important;
+            margin-top: 0;
+        }
+
+        .page-content {
+            margin-top: 24px;
+            margin-left: 146px;
+        }
+
+        .case-cols {
+            display: grid;
+            grid-template-columns: minmax(0, 700px) 400px;
+            gap: 44px;
+            align-items: start;
+            margin-top: 32px;
+        }
+
+        .pull-quote {
+            font-family: 'EditorialNew', 'PPEditorialOld', Georgia, serif;
+            font-size: 42px;
+            font-weight: 400;
+            color: #000000;
+            line-height: 115%;
+            padding-top: 4px;
+        }
+
+        .img-placeholder {
+            background: #f0f0f0;
+            aspect-ratio: 16 / 9;
+            width: 100%;
+        }
+
+        .img-placeholder-tall {
+            background: #f0f0f0;
+            aspect-ratio: 4 / 3;
+            width: 100%;
+        }
+
+        /* Break out of page-content to match main page full-width images */
+        .full-bleed {
+            margin-left: -146px;
+            width: calc(100% + 146px);
+            margin-top: 40px;
+            margin-bottom: 50px;
+        }
+
+        .img-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .section-dark {
+            background: #111;
+            color: #fff;
+            border-radius: 12px;
+            padding: 48px 40px;
+            margin-top: 48px;
+        }
+
+        .section-dark .pull-quote {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .section-dark .img-placeholder,
+        .section-dark .img-placeholder-tall {
+            background: #2a2a2a;
+        }
+
+        .section-dark .case-cols {
+            margin-top: 0;
+        }
+
+        .dark-label {
+            display: inline-block;
+            font-size: 14px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 24px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .section-spacer {
+            margin-top: 64px;
+        }
+
+        .case-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 48px 0 60px;
+            border-top: 1px solid #e8e8e8;
+            margin-top: 64px;
+        }
+
+        .case-nav a {
+            font-size: clamp(18px, 2vw, 22px);
+            font-weight: 500;
+            color: #000;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .case-nav a:hover {
+            color: #FF5100;
+        }
+
+        .case-nav .nav-prev::before {
+            content: '← ';
+        }
+
+        .case-nav .nav-next::after {
+            content: ' →';
+        }
+
+        .process-list {
+            margin-top: 24px;
+            padding-left: 24px;
+        }
+
+        .process-list li {
+            margin-bottom: 16px;
+            line-height: 130%;
+        }
+
+        /* Mobile */
+        @media screen and (max-width: 768px) {
+            .case-cols {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .pull-quote {
+                display: none;
+            }
+
+            .img-row {
+                grid-template-columns: 1fr;
+            }
+
+            .section-dark {
+                padding: 32px 24px;
+            }
+
+            .page-content {
+                margin-top: 90px;
+                margin-left: 0 !important;
+            }
+
+            .full-bleed {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .case-label {
+                margin-top: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Nav bar -->
+    <div class="top-bar">
+        <a href="index.html"><img src="./img/anatolie.png" class="sticky-image"></a>
+        <div class="top-right-content">
+            <div class="nav-links">
+                <a href="index.html#about">About</a>
+            </div>
+            <a href="mailto:ihoodstar@gmail.com?subject=Let's talk about design" class="primary-button">Let's talk</a>
+        </div>
+    </div>
+
+    <div class="page-content">
+
+        <!-- Author tagline -->
+        <h3 style="max-width: 700px; padding-bottom: 80px;">Strategy and design support for a
+            $&#10074;&#10074;&#10074;.6M GPV SaaS product at Square. $50M* exit design direction at GoParrot. 8+ years of
+            design practice.</h3>
+
+        <!-- Hero -->
+        <div class="case-cols" style="margin-top: 60px;">
+            <div>
+                <span class="case-label" style="margin-top: 0;">Case</span>
+                <h1>Checkout Redesign</h1>
+            </div>
+            <div></div>
+        </div>
+
+        <!-- Intro: problem context -->
+        <div class="case-cols">
+            <div>
+                <p>This one started with an audit, not a brief. Looking at the conversion data and the flow itself, it was obvious something was wrong.</p>
+                <p>Customers were losing revenue. The checkout had grown into a seven-step process: pages, modals, states, because product decisions had been made asynchronously over time, without anyone stepping back to look at the whole thing.</p>
+                <p>More than 30% of users were dropping off before completing an order.</p>
+            </div>
+            <div>
+                <p class="pull-quote">More than 30% of users were dropping off before completing an order</p>
+            </div>
+        </div>
+
+        <!-- Image -->
+        <div class="full-bleed">
+            <div class="img-placeholder"></div>
+        </div>
+
+        <!-- Process -->
+        <div class="case-cols section-spacer">
+            <div>
+                <p>I mapped every entry point into checkout: new order from the menu, order from a promo banner, returning to a saved order, abandoned cart emails.</p>
+                <p>I grouped what was similar, negotiated with product to remove what was unnecessary, and ran a competitive audit to understand the patterns users already know from market leaders.</p>
+                <p>Then I had to reconcile all of that with Square's own online ordering patterns, because GoParrot's checkout was built before the acquisition, so the two systems had never been properly aligned.</p>
+            </div>
+            <div>
+                <p class="pull-quote">The hardest part was bridging GoParrot and Square patterns both on the UX and UI side</p>
+            </div>
+        </div>
+
+        <!-- Image -->
+        <div class="full-bleed">
+            <div class="img-placeholder"></div>
+        </div>
+
+        <!-- Design system challenge -->
+        <div class="case-cols section-spacer">
+            <div>
+                <p>The hardest part was bridging GoParrot and Square patterns both on the UX and UI side. This happened during a design system migration, so I wasn't just redesigning flows. I was also creating additional components that didn't yet exist in Square's design system.</p>
+            </div>
+            <div></div>
+        </div>
+
+        <!-- Image -->
+        <div class="full-bleed">
+            <div class="img-placeholder"></div>
+        </div>
+
+        <!-- Outcome -->
+        <div class="case-cols section-spacer">
+            <div>
+                <p>We got the flow down from seven steps to two. We also added guest checkout, which hadn't existed in the product before — something the competitive audit made clearly overdue.</p>
+                <p>The results came quickly: conversion up nearly 5%, abandoned cart rate down 17%, time to complete checkout down by 22 seconds. Users left positive feedback. The team picked it up from there and kept iterating.</p>
+            </div>
+            <div>
+                <p class="pull-quote">Conversion up nearly 5%, abandoned cart rate down 17%, time to complete checkout down by 22 seconds</p>
+            </div>
+        </div>
+
+        <!-- Case navigation -->
+        <nav class="case-nav">
+            <a href="vision.html" class="nav-prev">Enterprise Vision</a>
+            <a href="#" class="nav-next">Royalty Fee Collection</a>
+        </nav>
+
+    </div>
+
+</body>
+
+</html>
