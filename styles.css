@@ -60,7 +60,7 @@ body {
 
 h1 {
     font-family: 'EditorialNew', Georgia, serif;
-    font-size: clamp(52px, 8vw, 88px); /* Minimum, preferred, maximum */
+    font-size: clamp(52px, 7vw, 78px); /* Minimum, preferred, maximum */
     line-height: 105%;
     letter-spacing: -0.01em;
     max-width: 100%;
