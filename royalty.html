@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royalty Fee Collection — Anatolie Micaliuc</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon.png">
+
+    <style>
+        @font-face {
+            font-family: 'EditorialNew';
+            src: url('./fonts/EditorialNew-Variable.woff2') format('woff2');
+            font-weight: 100 900;
+            font-style: normal;
+        }
+
+        /* Case study page overrides & additions */
+
+        .case-label {
+            display: inline-block;
+            font-size: 18px;
+            background-color: #FFECE6;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: #EE5324;
+            margin-top: 60px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .nav-links {
+            display: flex !important;
+            margin-top: 0;
+        }
+
+        .page-content {
+            margin-top: 24px;
+            margin-left: 146px;
+        }
+
+        .case-cols {
+            display: grid;
+            grid-template-columns: minmax(0, 700px) 400px;
+            gap: 44px;
+            align-items: start;
+            margin-top: 32px;
+        }
+
+        .pull-quote {
+            font-family: 'EditorialNew', 'PPEditorialOld', Georgia, serif;
+            font-size: 42px;
+            font-weight: 400;
+            color: #000000;
+            line-height: 115%;
+            padding-top: 4px;
+        }
+
+        .img-placeholder {
+            background: #f0f0f0;
+            aspect-ratio: 16 / 9;
+            width: 100%;
+        }
+
+        .img-placeholder-tall {
+            background: #f0f0f0;
+            aspect-ratio: 4 / 3;
+            width: 100%;
+        }
+
+        /* Break out of page-content to match main page full-width images */
+        .full-bleed {
+            margin-left: -146px;
+            width: calc(100% + 146px);
+            margin-top: 40px;
+            margin-bottom: 50px;
+        }
+
+        .img-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .section-dark {
+            background: #111;
+            color: #fff;
+            border-radius: 12px;
+            padding: 48px 40px;
+            margin-top: 48px;
+        }
+
+        .section-dark .pull-quote {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .section-dark .img-placeholder,
+        .section-dark .img-placeholder-tall {
+            background: #2a2a2a;
+        }
+
+        .section-dark .case-cols {
+            margin-top: 0;
+        }
+
+        .dark-label {
+            display: inline-block;
+            font-size: 14px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 24px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .section-spacer {
+            margin-top: 64px;
+        }
+
+        .case-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 48px 0 60px;
+            border-top: 1px solid #e8e8e8;
+            margin-top: 64px;
+        }
+
+        .case-nav a {
+            font-size: clamp(18px, 2vw, 22px);
+            font-weight: 500;
+            color: #000;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .case-nav a:hover {
+            color: #FF5100;
+        }
+
+        .case-nav .nav-prev::before {
+            content: '← ';
+        }
+
+        .case-nav .nav-next::after {
+            content: ' →';
+        }
+
+        .process-list {
+            margin-top: 24px;
+            padding-left: 24px;
+        }
+
+        .process-list li {
+            margin-bottom: 16px;
+            line-height: 130%;
+        }
+
+        /* Mobile */
+        @media screen and (max-width: 768px) {
+            .case-cols {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .pull-quote {
+                display: none;
+            }
+
+            .img-row {
+                grid-template-columns: 1fr;
+            }
+
+            .section-dark {
+                padding: 32px 24px;
+            }
+
+            .page-content {
+                margin-top: 90px;
+                margin-left: 0 !important;
+            }
+
+            .full-bleed {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .case-label {
+                margin-top: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Nav bar -->
+    <div class="top-bar">
+        <a href="index.html"><img src="./img/anatolie.png" class="sticky-image"></a>
+        <div class="top-right-content">
+            <div class="nav-links">
+                <a href="index.html#about">About</a>
+            </div>
+            <a href="mailto:ihoodstar@gmail.com?subject=Let's talk about design" class="primary-button">Let's talk</a>
+        </div>
+    </div>
+
+    <div class="page-content">
+
+        <!-- Author tagline -->
+        <h3 style="max-width: 700px; padding-bottom: 80px;">Strategy and design support for a
+            $&#10074;&#10074;&#10074;.6M GPV SaaS product at Square. $50M* exit design direction at GoParrot. 8+ years of
+            design practice.</h3>
+
+        <!-- Hero -->
+        <div class="case-cols" style="margin-top: 60px;">
+            <div>
+                <span class="case-label" style="margin-top: 0;">Case</span>
+                <h1>Royalty Fee Collection</h1>
+            </div>
+            <div></div>
+        </div>
+
+        <!-- Intro -->
+        <div class="case-cols">
+            <div>
+                <p>Franchise owners had been asking for this for a while — they needed a way to calculate and collect royalties from their franchisees directly inside Square.</p>
+                <p>Manual invoices, spreadsheets, third-party tools. We didn't want to send them elsewhere for something this core to running a franchise.</p>
+            </div>
+            <div>
+                <p class="pull-quote">Sellers needed a way to calculate and collect royalties directly inside franchise dashboard</p>
+            </div>
+        </div>
+
+        <!-- Image -->
+        <div class="full-bleed">
+            <div class="img-placeholder"></div>
+        </div>
+
+        <!-- Research -->
+        <div class="case-cols section-spacer">
+            <div>
+                <p>We ran customer interviews, synthesized all related requests. What became clear quickly: there's no single universal royalty formula, but there's one that covers most cases with small variations.</p>
+                <p>Some franchisors also wanted to automate everything, others send invoices manually. That shaped how flexible the system needed to be.</p>
+            </div>
+            <div>
+                <p class="pull-quote">What became clear quickly: there's no single universal royalty formula</p>
+            </div>
+        </div>
+
+        <!-- Image -->
+        <div class="full-bleed">
+            <div class="img-placeholder"></div>
+        </div>
+
+        <!-- Platform question -->
+        <div class="case-cols section-spacer">
+            <div>
+                <p>Before solving the UX, we had to solve the platform question. Franchise Suite lived as a third-party product relative to Square Dashboard, which meant the core flow could live in several different places.</p>
+                <p>I designed and explored three options: a native Franchise Suite experience, a Square Dashboard-native experience, and a hybrid. Each had different trade-offs in technical lift, time, and user experience continuity.</p>
+            </div>
+            <div>
+                <p class="pull-quote">Each solution had different trade-offs in technical lift, time, and user experience continuity</p>
+            </div>
+        </div>
+
+        <!-- Image -->
+        <div class="full-bleed">
+            <div class="img-placeholder"></div>
+        </div>
+
+        <!-- Outcome -->
+        <div class="case-cols section-spacer">
+            <div>
+                <p>We landed on a pragmatic hybrid: royalty configuration inside Franchise Suite, collection powered by Square's existing invoice infrastructure.</p>
+                <p>When additional development capacity wasn't available on the Square invoicing side, we scoped to a lightweight version covering the most common royalty model and delivering core value without the full feature set.</p>
+                <p>Users responded well, adoption rate hit 26% in first weeks. We iterated from there, adding things like automated deductions based on their feedback.</p>
+                <p>More importantly, it unblocked strategic deals. Royalty collection was a deal-breaker category for enterprise prospects — having it meant we could close accounts we couldn't before.</p>
+            </div>
+            <div>
+                <p class="pull-quote">Users responded well, adoption rate hit 26% in first weeks</p>
+            </div>
+        </div>
+
+        <!-- Case navigation -->
+        <nav class="case-nav">
+            <a href="checkout.html" class="nav-prev">Checkout Redesign</a>
+            <a href="vision.html" class="nav-next">Enterprise Vision</a>
+        </nav>
+
+    </div>
+
+</body>
+
+</html>
