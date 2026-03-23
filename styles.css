@@ -33,17 +33,18 @@ body {
 }
 
 h1 {
-    font-family: 'Stratos', 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'EditorialNew', Georgia, serif;
     font-size: clamp(52px, 8vw, 88px); /* Minimum, preferred, maximum */
-    line-height: 93%;
+    line-height: 105%;
     letter-spacing: -0.01em;
     max-width: 100%;
-    font-weight: 600;
+    font-weight: 400;
     margin-top: 4px;
     margin-bottom: 32px;
 }
 
 h3 {
+    font-family: 'Stratos', 'Helvetica Neue', Arial, sans-serif;
     font-size: clamp(26px, 4vw, 34px);
     line-height: 110%;
     font-weight: 500;
@@ -390,6 +391,13 @@ img {
     font-family: 'Stratos';
     src: url('/fonts/Stratos-Regular.woff2') format('woff2');
     font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'EditorialNew';
+    src: url('./fonts/EditorialNew-Variable.woff2') format('woff2');
+    font-weight: 100 900;
     font-style: normal;
 }
 
