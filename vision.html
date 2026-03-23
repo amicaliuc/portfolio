@@ -23,15 +23,15 @@
         }
 
         .case-label {
-            display: inline-block;
-            font-size: 18px;
-            background-color: #FFECE6;
-            padding: 4px 8px;
-            border-radius: 4px;
-            color: #EE5324;
+            display: block;
+            font-size: inherit;
+            color: #000;
             margin-top: 60px;
             margin-bottom: 8px;
-            font-weight: 500;
+            font-weight: 400;
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
         }
 
         .nav-links {
@@ -61,6 +61,40 @@
             padding-top: 4px;
         }
 
+        /* Metadata row: Scope / Role / Year */
+        .case-meta {
+            display: flex;
+            gap: 40px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+
+        .meta-label {
+            font-size: inherit;
+            color: rgba(0, 0, 0, 0.4);
+            margin: 0 0 4px 0;
+            line-height: 105%;
+        }
+
+        .meta-value {
+            font-size: inherit;
+            color: #000;
+            margin: 0;
+            line-height: 105%;
+        }
+
+        /* Section subheadings */
+        .section-subheading {
+            font-family: 'Stratos', 'Helvetica Neue', Arial, sans-serif;
+            font-size: inherit;
+            letter-spacing: normal;
+            color: #000;
+            font-weight: 700;
+            line-height: 125%;
+            margin: 0 0 16px 0;
+            text-transform: none;
+        }
+
         .img-placeholder {
             background: #f0f0f0;
             aspect-ratio: 16 / 9;
@@ -75,8 +109,9 @@
 
         /* Break out of page-content to match main page full-width images */
         .full-bleed {
-            margin-left: -146px;
-            width: calc(100% + 146px);
+            margin-left: calc(-146px - 8px);
+            margin-right: -8px;
+            width: auto;
             margin-top: 40px;
             margin-bottom: 50px;
         }
@@ -84,7 +119,15 @@
         .img-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
+            gap: 20px;
+        }
+
+        .full-bleed:has(+ .full-bleed) {
+            margin-bottom: 0;
+        }
+
+        .full-bleed + .full-bleed {
+            margin-top: 20px;
         }
 
         .section-dark {
@@ -130,12 +173,12 @@
             justify-content: space-between;
             align-items: center;
             padding: 48px 0 60px;
-            border-top: 1px solid #e8e8e8;
+            border-top: none;
             margin-top: 64px;
         }
 
         .case-nav a {
-            font-size: clamp(18px, 2vw, 22px);
+            font-size: inherit;
             font-weight: 500;
             color: #000;
             text-decoration: none;
@@ -242,75 +285,102 @@
     <div class="page-content">
 
         <!-- Author tagline -->
-        <h3 style="max-width: 700px; padding-bottom: 80px;"><strong>Anatolie Micaliuc</strong> Strategy and design support for a
-            $&#10074;&#10074;&#10074;.6M GPV SaaS product at Square. $50M*exit design direction at GoParrot. 8+ years of
-            design practice.</h3>
+        <h3 style="max-width: 700px; padding-bottom: 80px;"><strong>Anatolie Micaliuc</strong> Product design for B2B / B2C. Owned design at Square for Franchises ($&#10074;&#10074;&#10074;.6M GPV platform) and GoParrot ($50M exit). 8+ years of practice.</h3>
 
         <!-- Hero -->
         <div class="case-cols" style="margin-top: 60px;">
             <div>
-                <span class="case-label" style="margin-top: 0;">Case</span>
                 <h1>Enterprise F&amp;B Vision</h1>
+                <!-- Metadata -->
+                <div class="case-meta">
+                    <div>
+                        <p class="meta-label">Scope</p>
+                        <p class="meta-value">Product strategy, UX/UI, Prototyping</p>
+                    </div>
+                    <div>
+                        <p class="meta-label">Role</p>
+                        <p class="meta-value">Design DRI</p>
+                    </div>
+                    <div>
+                        <p class="meta-label">Year</p>
+                        <p class="meta-value">2024</p>
+                    </div>
+                </div>
             </div>
             <div></div>
         </div>
 
-        <!-- Intro: problem context -->
+        <!-- Intro -->
         <div class="case-cols">
             <div>
-                <p>After Square acquired GoParrot, the product didn't have a clear home. We spent the first year on integration, but there was no long-term vision: each team was pulling in its own direction, and enterprise clients were asking for things the product couldn't deliver. Competitors like Toast and Olo were already ahead on enterprise. In 2024, leadership finally gave us the green light to fix that.</p>
+                <p>After Square acquired GoParrot (Franchise Suite), the product lacked a strategic direction. I led a vision initiative that gave the platform a north star, defining what Franchise Suite should become for enterprise F&amp;B sellers, and how to get there.</p>
             </div>
-            <div>
-                <p class="pull-quote">After Square acquired GoParrot, the product lacked a strategic direction</p>
-            </div>
+            <div></div>
         </div>
 
-        <!-- Image: context screenshot -->
+        <!-- Image 1 -->
         <div class="full-bleed">
             <div class="img-placeholder"></div>
         </div>
 
-        <!-- Process: research & reframe -->
+        <!-- Challenge -->
         <div class="case-cols section-spacer">
             <div>
-                <p>Before touching Figma, I spent weeks gathering everything the company already knew — market research, customer interviews, sales feedback, roadmaps from five different teams, a product audit, competitive analysis. The real shift came when I stopped framing it as "what features are we missing" and started asking "why does complexity break for these clients at scale?"</p>
-                <p>That reframe changed everything. The problem wasn't features, it was the absence of scalability patterns in the product's architecture. A restaurant with one location has linear relationships inside its system. At 20 or 500 locations, complexity grows non-linearly. Without scalability patterns baked in, every new feature would break at enterprise scale.</p>
+                <h4 class="section-subheading">Challenge</h4>
+                <p>After Square acquired GoParrot, the product didn't have a clear home. We spent the first year on integration, but there was no long-term vision: each team was pulling in its own direction, and enterprise clients were asking for things the product couldn't deliver.</p>
+                <p>Competitors like Toast and Olo were already ahead on enterprise. Leadership needed a clear answer: what are we building, for whom, and in what order?</p>
+            </div>
+            <div>
+                <p class="pull-quote">Leadership needed a clear answer: what are we building, for whom, and in what order?</p>
+            </div>
+        </div>
+
+        <!-- Image 2 -->
+        <div class="full-bleed">
+            <div class="img-placeholder"></div>
+        </div>
+
+        <!-- Image 3 -->
+        <div class="full-bleed">
+            <div class="img-placeholder"></div>
+        </div>
+
+        <!-- Solution -->
+        <div class="case-cols section-spacer">
+            <div>
+                <h4 class="section-subheading">Solution</h4>
+                <p>Before touching Figma, I spent weeks gathering everything the company already knew: market research, customer interviews, sales feedback, roadmaps from five different teams, a product audit, competitive analysis.</p>
+                <p>The real shift came when I stopped framing it as 'what features are we missing' and started asking 'why does complexity break for these clients at scale?'</p>
+                <p>That reframe changed everything. The problem wasn't features, it was the absence of scalability patterns in the product's architecture.</p>
+                <p>A restaurant with one location has linear relationships inside its system. At 20+ locations, complexity grows non-linearly. Without scalability patterns baked in, every new feature would break at enterprise scale.</p>
             </div>
             <div>
                 <p class="pull-quote">The problem wasn't features, it was the absence of scalability patterns</p>
             </div>
         </div>
 
-        <!-- Vision Work -->
+        <!-- Image 4 -->
         <div class="full-bleed">
             <div class="img-placeholder"></div>
         </div>
 
-        <!-- Three-point list: what needed solving -->
-        <div class="section-spacer" style="max-width: 700px;">
-            <p>That reframe changed everything. From there I had to solve three things in parallel:</p>
-            <ol class="process-list">
-                <li>Design a realistic migration path from GoParrot into native Square</li>
-                <li>Align the roadmaps and interests of several product teams</li>
-                <li>Make sure the vision wasn't a designer artifact — but something that could actually be sliced into a product roadmap</li>
-            </ol>
+        <!-- Images 5 & 6 -->
+        <div class="full-bleed">
+            <div class="img-row">
+                <div class="img-placeholder"></div>
+                <div class="img-placeholder"></div>
+            </div>
         </div>
 
-        <!-- More work screenshots -->
-        <div class="full-bleed">
-            <div class="img-placeholder"></div>
-        </div>
-        <div class="full-bleed">
-            <div class="img-placeholder"></div>
-        </div>
-
-        <!-- Outcome -->
+        <!-- Impact -->
         <div class="case-cols section-spacer">
             <div>
-                <p>The final deliverable was a leadership presentation covering future product behavior, a design pattern system for scaling, a phased transition plan, and a cross-team roadmap. The Head of Product, Design leadership and Sales team responded well. It helped unblock several stalled projects and gave a clear direction for the team. Location groups got funded and launched.</p>
+                <h4 class="section-subheading">Impact</h4>
+                <p>➀&nbsp;The vision helped unblock and get funding for several stalled initiatives ➁&nbsp;Location groups received funding and launched ➂&nbsp;Enterprise menus moved forward ➃&nbsp;Four teams gained a shared language and direction.</p>
+                <p>The final deliverable was a leadership presentation covering future product behavior, a design pattern system for scaling, a phased transition plan, and a cross-team roadmap.</p>
             </div>
             <div>
-                <p class="pull-quote">The vision helped unblock several stalled multi-million dollar initiatives</p>
+                <p class="pull-quote">The vision helped unblock several stalled multi-million dollar initiatives and align several product teams</p>
             </div>
         </div>
 

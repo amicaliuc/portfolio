@@ -75,8 +75,9 @@
 
         /* Break out of page-content to match main page full-width images */
         .full-bleed {
-            margin-left: -146px;
-            width: calc(100% + 146px);
+            margin-left: calc(-146px - 8px);
+            margin-right: -8px;
+            width: auto;
             margin-top: 40px;
             margin-bottom: 50px;
         }
@@ -84,7 +85,15 @@
         .img-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
+            gap: 20px;
+        }
+
+        .full-bleed:has(+ .full-bleed) {
+            margin-bottom: 0;
+        }
+
+        .full-bleed + .full-bleed {
+            margin-top: 20px;
         }
 
         .section-dark {
@@ -130,12 +139,12 @@
             justify-content: space-between;
             align-items: center;
             padding: 48px 0 60px;
-            border-top: 1px solid #e8e8e8;
+            border-top: none;
             margin-top: 64px;
         }
 
         .case-nav a {
-            font-size: clamp(18px, 2vw, 22px);
+            font-size: inherit;
             font-weight: 500;
             color: #000;
             text-decoration: none;
@@ -242,9 +251,7 @@
     <div class="page-content">
 
         <!-- Author tagline -->
-        <h3 style="max-width: 700px; padding-bottom: 80px;"><strong>Anatolie Micaliuc</strong> Strategy and design support for a
-            $&#10074;&#10074;&#10074;.6M GPV SaaS product at Square. $50M*exit design direction at GoParrot. 8+ years of
-            design practice.</h3>
+        <h3 style="max-width: 700px; padding-bottom: 80px;"><strong>Anatolie Micaliuc</strong> Product design for B2B / B2C. Owned design at Square for Franchises ($&#10074;&#10074;&#10074;.6M GPV platform) and GoParrot ($50M exit). 8+ years of practice.</h3>
 
         <!-- Hero -->
         <div class="case-cols" style="margin-top: 60px;">

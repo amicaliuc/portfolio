@@ -27,7 +27,7 @@ body {
     font-family: 'Stratos', 'Helvetica Neue', Arial, sans-serif;
     font-size: clamp(20px, 4vw, 26px);
     font-weight: 500;
-    line-height: 120%;
+    line-height: 125%;
     color: #000000;
     background-color: #ffffff;
 }
@@ -61,7 +61,7 @@ p {
 
 .caption {
     font-size: 18px;
-    line-height: 120%;
+    line-height: 125%;
     color: rgb(39, 39, 39);
     font-family: 'Stratos', 'Helvetica Neue', Arial, sans-serif;
     font-weight: 500;
@@ -167,7 +167,7 @@ li {
 
 .nav-links a {
     font-size: 26px; /* Same as p style */
-    line-height: 120%; /* Same as p style */
+    line-height: 125%; /* Same as p style */
     font-weight: 500;
     color: #0b0b0b;
     text-decoration: none;
