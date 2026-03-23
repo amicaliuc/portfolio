@@ -107,6 +107,28 @@
             width: 100%;
         }
 
+        /* Parallax container for Vision Full image */
+        .parallax-container {
+            height: calc(50vw - 10px);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .parallax-img {
+            width: 100%;
+            height: calc(100% + 960px);
+            object-fit: cover;
+            object-position: top;
+            transform: translateY(0);
+            will-change: transform;
+        }
+
+        @media (max-width: 768px) {
+            .parallax-container {
+                height: 80vw;
+            }
+        }
+
         /* Break out of page-content to match main page full-width images */
         .full-bleed {
             margin-left: calc(-146px - 8px);
@@ -319,8 +341,8 @@
         </div>
 
         <!-- Image 1 -->
-        <div class="full-bleed">
-            <div class="img-placeholder"></div>
+        <div class="full-bleed" style="margin-top:-24px;">
+            <img src="./img/Vision Hero.png" alt="Vision Hero" style="width:100%;display:block;">
         </div>
 
         <!-- Challenge -->
@@ -337,12 +359,12 @@
 
         <!-- Image 2 -->
         <div class="full-bleed">
-            <div class="img-placeholder"></div>
+            <img src="./img/Vision Jam.png" alt="Vision Jam" style="width:100%;display:block;">
         </div>
 
         <!-- Image 3 -->
         <div class="full-bleed">
-            <div class="img-placeholder"></div>
+            <img src="./img/Vision Scale.png" alt="Vision Scale" style="width:100%;display:block;">
         </div>
 
         <!-- Solution -->
@@ -359,16 +381,18 @@
             </div>
         </div>
 
-        <!-- Image 4 -->
+        <!-- Image 4 — parallax -->
         <div class="full-bleed">
-            <div class="img-placeholder"></div>
+            <div class="parallax-container">
+                <img src="./img/Vision Full.png" alt="Vision Full" class="parallax-img">
+            </div>
         </div>
 
         <!-- Images 5 & 6 -->
         <div class="full-bleed">
             <div class="img-row">
-                <div class="img-placeholder"></div>
-                <div class="img-placeholder"></div>
+                <img src="./img/Vision Publsh.png" alt="Vision Publish" style="width:100%;display:block;">
+                <img src="./img/Vision Navigation.png" alt="Vision Navigation" style="width:100%;display:block;">
             </div>
         </div>
 
@@ -392,6 +416,32 @@
 
     </div>
 
+    <script src="./transitions.js"></script>
+    <script>
+        (function () {
+            const img = document.querySelector('.parallax-img');
+            if (!img) return;
+
+            const range = 480; // px of total movement
+
+            function update() {
+                const container = img.closest('.parallax-container');
+                const rect = container.getBoundingClientRect();
+                const vh = window.innerHeight;
+
+                // progress: 0 when bottom of container at bottom of viewport,
+                //           1 when top of container at top of viewport
+                const progress = 1 - (rect.bottom / (vh + rect.height));
+                const clamped = Math.min(1, Math.max(0, progress));
+                const y = clamped * -range; // 0 → -range (top to bottom)
+
+                img.style.transform = `translateY(${y}px)`;
+            }
+
+            window.addEventListener('scroll', update, { passive: true });
+            update();
+        })();
+    </script>
 </body>
 
 </html>

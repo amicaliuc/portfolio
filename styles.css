@@ -18,6 +18,32 @@ html {
     margin-top: 16px;
 }
 
+/* Custom cursor */
+@media (pointer: fine) {
+    body, a, button { cursor: none !important; }
+
+    .cursor-dot {
+        position: fixed;
+        width: 20px;
+        height: 20px;
+        background: #fff;
+        border-radius: 50%;
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        z-index: 99999;
+        opacity: 0;
+        mix-blend-mode: difference;
+        transition: width 0.3s ease, height 0.3s ease, opacity 0.2s ease;
+    }
+
+    .cursor-dot.visible { opacity: 1; }
+
+    .cursor-dot.hovering {
+        width: 56px;
+        height: 56px;
+    }
+}
+
 body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -29,7 +55,7 @@ body {
     font-weight: 500;
     line-height: 125%;
     color: #000000;
-    background-color: #ffffff;
+    background-color: #FAFAF9;
 }
 
 h1 {
@@ -234,6 +260,14 @@ img {
 
 .project-info p {
     margin: 0;
+}
+
+a:has(.project-info) .project-info p {
+    transition: color 0.2s ease;
+}
+
+a:has(.project-info) .project-info:hover p {
+    color: #FF5100;
 }
 
 
