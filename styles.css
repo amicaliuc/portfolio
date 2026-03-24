@@ -11,7 +11,7 @@ html {
     grid-template-columns: 1fr 3fr;
     grid-gap: 0px;
     margin-top: 90px;
-   
+
 }
 
 .gridcard {
@@ -20,7 +20,12 @@ html {
 
 /* Custom cursor */
 @media (pointer: fine) {
-    body, a, button { cursor: none !important; }
+
+    body,
+    a,
+    button {
+        cursor: none !important;
+    }
 
     .cursor-dot {
         position: fixed;
@@ -36,7 +41,9 @@ html {
         transition: width 0.3s ease, height 0.3s ease, opacity 0.2s ease;
     }
 
-    .cursor-dot.visible { opacity: 1; }
+    .cursor-dot.visible {
+        opacity: 1;
+    }
 
     .cursor-dot.hovering {
         width: 56px;
@@ -60,7 +67,8 @@ body {
 
 h1 {
     font-family: 'EditorialNew', Georgia, serif;
-    font-size: clamp(52px, 7vw, 78px); /* Minimum, preferred, maximum */
+    font-size: clamp(52px, 7vw, 72px);
+    /* Minimum, preferred, maximum */
     line-height: 105%;
     letter-spacing: -0.01em;
     max-width: 100%;
@@ -82,7 +90,7 @@ h3 {
 
 p {
     margin-top: 12px;
- }
+}
 
 
 .caption {
@@ -98,25 +106,30 @@ p {
 
 
 ul {
-    
-    padding: 0; /* Removes all padding */
- 
+
+    padding: 0;
+    /* Removes all padding */
+
 
 }
 
 li {
-    margin-bottom: 12px; /* Adjust the value as needed */
+    margin-bottom: 12px;
+    /* Adjust the value as needed */
 }
 
 .button {
     display: inline-block;
-    margin-top: 0px; /* Adjust spacing between the button and the ul */
+    margin-top: 0px;
+    /* Adjust spacing between the button and the ul */
     margin-bottom: 16px;
-    padding: 18px 26px; /* Adjust padding for the button size */
+    padding: 18px 26px;
+    /* Adjust padding for the button size */
     font-size: 26px;
     font-weight: 600;
     color: #000000;
-    background-color: #00000010; /* Button background color */
+    background-color: #00000010;
+    /* Button background color */
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -127,7 +140,8 @@ li {
 
 .button:hover {
     color: #ffffff;
-    background-color: #FF5100; /* Darker shade on hover */
+    background-color: #FF5100;
+    /* Darker shade on hover */
 }
 
 .primary-button {
@@ -160,22 +174,28 @@ li {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    padding: 24px 24px; /* Match body's left and right padding */
-    background-color: transparent; /* Ensure background doesn't interfere */
+    padding: 24px 24px;
+    /* Match body's left and right padding */
+    background-color: transparent;
+    /* Ensure background doesn't interfere */
 }
 
 .sticky-image {
-    width: 133px; /* Adjust the size of the image */
+    width: 133px;
+    /* Adjust the size of the image */
     height: auto;
-   
+
 }
 
 .top-right-content {
     display: flex;
-    flex-direction: row; /* Change to row to align items horizontally */
+    flex-direction: row;
+    /* Change to row to align items horizontally */
     align-items: center;
-    gap: 32px; /* Space between nav-links and button */
-    margin-top: 0; /* Remove top margin */
+    gap: 32px;
+    /* Space between nav-links and button */
+    margin-top: 0;
+    /* Remove top margin */
 }
 
 .top-left-content {
@@ -186,14 +206,17 @@ li {
 
 .nav-links {
     display: none;
-    gap: 16px; /* Space between individual links */
+    gap: 16px;
+    /* Space between individual links */
     margin-top: 0;
     font-size: 26px;
 }
 
 .nav-links a {
-    font-size: 26px; /* Same as p style */
-    line-height: 125%; /* Same as p style */
+    font-size: 26px;
+    /* Same as p style */
+    line-height: 125%;
+    /* Same as p style */
     font-weight: 500;
     color: #0b0b0b;
     text-decoration: none;
@@ -202,15 +225,19 @@ li {
 }
 
 .nav-links a:hover {
-    color: #FF5100; /* Highlight color on hover */
+    color: #FF5100;
+    /* Highlight color on hover */
 }
 
 .sticky-svg {
     position: fixed;
-    top: 116px; /* Adjust this value to position below top-right-content */
-    right: 28px; /* Match top-bar padding */
+    top: 116px;
+    /* Adjust this value to position below top-right-content */
+    right: 28px;
+    /* Match top-bar padding */
     z-index: 999;
-    width: 300px; /* Adjust size as needed */
+    width: 300px;
+    /* Adjust size as needed */
     height: auto;
     transition: opacity 0.3s ease-out;
 }
@@ -242,14 +269,14 @@ li {
 }
 
 img {
-  width: 100%;
-  height: auto;
-  margin: 0;
+    width: 100%;
+    height: auto;
+    margin: 0;
 }
 
 .footerimg {
     margin-left: 140px;
-    
+
 }
 
 .project-info {
@@ -279,20 +306,20 @@ a:has(.project-info) .project-info:hover p {
     padding: 12px 14px;
     border-radius: 4px;
     color: #EE5324;
-    }
+}
 
 .name {
-      margin: 0 0 0px 0;
-      font-weight: 500;
-    }
+    margin: 0 0 0px 0;
+    font-weight: 500;
+}
 
 .title {
-      font-weight: 600;
-      font-size: 55px;
-      line-height: 90%;
-      display: inline-block;
-      
-    }
+    font-weight: 600;
+    font-size: 55px;
+    line-height: 90%;
+    display: inline-block;
+
+}
 
 .carousel {
     position: relative;
@@ -341,30 +368,40 @@ a:has(.project-info) .project-info:hover p {
 
 
 [id] {
-    scroll-margin-top: 20px; /* Adjust based on the height of your fixed header */
+    scroll-margin-top: 20px;
+    /* Adjust based on the height of your fixed header */
 }
 
 @media screen and (max-width: 768px) {
 
 
     .highlight {
-        font-size: 20px; /* Smaller font size on mobile */
-        padding: 2px 4px; /* Smaller padding on mobile */
-        margin-top: 40px; /* Adjust margin for mobile */
+        font-size: 20px;
+        /* Smaller font size on mobile */
+        padding: 2px 4px;
+        /* Smaller padding on mobile */
+        margin-top: 40px;
+        /* Adjust margin for mobile */
     }
 
     .title {
-        font-size: 42px; /* Smaller title on mobile */
-        line-height: 90%; /* Adjust line height for mobile */
+        font-size: 42px;
+        /* Smaller title on mobile */
+        line-height: 90%;
+        /* Adjust line height for mobile */
     }
 
     .button,
     .primary-button {
-        font-size: 26px; /* Smaller font size on mobile */
-        padding: 18px 24px; /* Smaller padding on mobile */
+        font-size: 26px;
+        /* Smaller font size on mobile */
+        padding: 18px 24px;
+        /* Smaller padding on mobile */
     }
+
     .column-left {
-        margin-left: 0 !important; /* Remove margin on mobile */
+        margin-left: 0 !important;
+        /* Remove margin on mobile */
     }
 
     .gridcard {
@@ -385,27 +422,29 @@ a:has(.project-info) .project-info:hover p {
 
     .footerimg {
         margin-left: 0 !important;
-        
+
     }
 
     .sticky-svg {
-        display: none; /* Hide on mobile */
+        display: none;
+        /* Hide on mobile */
     }
 
     .column-left {
-        margin-top: 0 !important; /* Remove margin on mobile */
+        margin-top: 0 !important;
+        /* Remove margin on mobile */
     }
 
 
-#acquisition {
+    #acquisition {
         margin-top: 0 !important;
     }
 
-#scale {
+    #scale {
         margin-top: 0 !important;
     }
 
-#early_stage {
+    #early_stage {
         margin-top: 0 !important;
     }
 
@@ -413,8 +452,9 @@ a:has(.project-info) .project-info:hover p {
 }
 
 @media screen and (max-width: 999px) {
-     .sticky-svg {
-        display: none; /* Hide on mobile */
+    .sticky-svg {
+        display: none;
+        /* Hide on mobile */
     }
 
 }
@@ -434,6 +474,3 @@ a:has(.project-info) .project-info:hover p {
     font-weight: 100 900;
     font-style: normal;
 }
-
-
-
