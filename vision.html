@@ -187,16 +187,18 @@
         }
 
         .section-spacer {
-            margin-top: 64px;
+            margin-top: 32px;
         }
 
         .case-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 48px 0 60px;
+            padding: 48px 24px 60px;
             border-top: none;
             margin-top: 64px;
+            margin-left: calc(-146px - 8px);
+            margin-right: -8px;
         }
 
         .case-nav a {
@@ -403,7 +405,7 @@
         </div>
 
         <!-- My approach cont. -->
-        <div class="case-cols" style="margin-top: 32px;">
+        <div class="case-cols" style="margin-top: 16px;">
             <div>
                 <p>Without scalability patterns baked into the product's architecture, every new feature would break at enterprise. That reframe changed the entire scope of the problem. The gap wasn't a feature list — it was the absence of a structural model that could hold enterprise complexity.</p>
             </div>
@@ -414,9 +416,8 @@
         <div class="case-cols section-spacer">
             <div>
                 <h4 class="section-subheading">What I built</h4>
-                <p>From that insight, I designed a vision that covered the five core surfaces where complexity breaks for enterprise operators:</p>
+                <p>From that insight, I designed a vision that covered the core surfaces where complexity breaks for enterprise operators, including:</p>
                 <ul class="process-list">
-                    <li><strong>Onboarding</strong> — a path for multi-location setup.</li>
                     <li><strong>Menu management</strong> — a hierarchical publishing model letting operators define menus at the brand, region, or location level.</li>
                     <li><strong>Location management</strong> — a groups layer that lets operators treat clusters of locations as units, not individual entries.</li>
                     <li><strong>Reports &amp; AI insights</strong> — cross-location rollup views with anomaly detection, replacing location-by-location switching.</li>
@@ -440,18 +441,11 @@
         </div>
 
         <!-- Deliverable -->
-        <div class="case-cols" style="margin-top: 32px;">
+        <div class="case-cols" style="margin-top: 16px;">
             <div>
                 <p>Each surface included high-fidelity UI, prototypes, and a pattern annotation. The final deliverable was a leadership presentation covering the full product vision and a phased transition plan mapping which surfaces to build first and why.</p>
             </div>
             <div></div>
-        </div>
-
-        <!-- Image — Full (parallax) -->
-        <div class="full-bleed">
-            <div class="parallax-container">
-                <picture><source srcset="./img/Vision Full.webp" type="image/webp"><img src="./img/Vision Full.png" alt="Vision Full" class="parallax-img" loading="lazy"></picture>
-            </div>
         </div>
 
         <!-- Impact -->
@@ -463,11 +457,19 @@
             <div></div>
         </div>
 
+        <!-- Image — Full (parallax) -->
+        <div class="full-bleed">
+            <div class="parallax-container">
+                <picture><source srcset="./img/Vision Full.webp" type="image/webp"><img src="./img/Vision Full.png" alt="Vision Full" class="parallax-img" loading="lazy"></picture>
+            </div>
+        </div>
+
         <!-- What made this hard -->
         <div class="case-cols section-spacer">
             <div>
                 <h4 class="section-subheading">What made this hard</h4>
-                <p>This initiative didn't start with a brief — I had to create one. That meant defining the problem, earning alignment on the framing, and then designing the solution, all without a PM counterpart. Every design decision had to be defensible as a scalable pattern: something that would still hold at 500-location enterprise scale, not just 20.</p>
+                <p>This initiative didn't start with a brief — I had to create one. That meant defining the problem, earning alignment on the framing, and then designing the solution, all without a PM counterpart.</p>
+                <p>Every design decision had to be defensible as a scalable pattern: something that would still hold at 500-location enterprise scale, not just 20.</p>
             </div>
             <div></div>
         </div>

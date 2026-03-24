@@ -173,7 +173,7 @@ li {
 .top-right-content {
     display: flex;
     flex-direction: row; /* Change to row to align items horizontally */
-    align-items: flex-start; /* Center items vertically */
+    align-items: center;
     gap: 32px; /* Space between nav-links and button */
     margin-top: 0; /* Remove top margin */
 }
@@ -187,7 +187,7 @@ li {
 .nav-links {
     display: none;
     gap: 16px; /* Space between individual links */
-    margin-top: -10px; /* Remove any margin */
+    margin-top: 0;
     font-size: 26px;
 }
 
