@@ -45,21 +45,21 @@
             padding-bottom: 0;
         }
 
-        .page-content > .full-bleed:last-child {
-            margin-bottom: 12px;
+        .page-content>.full-bleed:last-child {
+            margin-bottom: 20px;
         }
 
         .case-cols {
             display: grid;
-            grid-template-columns: minmax(0, 700px) 400px;
-            gap: 44px;
+            grid-template-columns: minmax(0, 700px) minmax(0, 400px);
+            gap: 28px;
             align-items: start;
             margin-top: 32px;
         }
 
         .pull-quote {
             font-family: 'EditorialNew', 'PPEditorialOld', Georgia, serif;
-            font-size: 42px;
+            font-size: clamp(22px, 3.5vw, 42px);
             font-weight: 400;
             color: #000000;
             line-height: 115%;
@@ -225,6 +225,30 @@
             line-height: 130%;
         }
 
+        /* Tablet: content under avatar, pull-quote scales */
+        @media screen and (max-width: 1200px) {
+            .page-content {
+                margin-top: 148px;
+                margin-left: 0 !important;
+            }
+
+            .case-cols {
+                grid-template-columns: 700px minmax(0, 400px);
+                gap: 28px;
+            }
+
+            .full-bleed {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                width: 100% !important;
+            }
+
+            .case-nav {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+        }
+
         /* Mobile */
         @media screen and (max-width: 768px) {
             .case-cols {
@@ -251,7 +275,7 @@
 
             .page-content {
                 margin-top: 148px;
-                margin-left: 8px !important;
+                margin-left: 0 !important;
             }
 
             .top-right-content {
@@ -331,13 +355,15 @@
                         <p class="meta-label">Scope</p>
                         <p class="meta-value">Strategy · UX/UI · Prototyping · Leadership alignment</p>
                     </div>
-                    <div>
-                        <p class="meta-label">Role</p>
-                        <p class="meta-value">Design DRI</p>
-                    </div>
-                    <div>
-                        <p class="meta-label">Year</p>
-                        <p class="meta-value">2024</p>
+                    <div style="display:flex;gap:40px;">
+                        <div>
+                            <p class="meta-label">Role</p>
+                            <p class="meta-value">Design DRI</p>
+                        </div>
+                        <div>
+                            <p class="meta-label">Year</p>
+                            <p class="meta-value">2024-25</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -425,7 +451,8 @@
         <div class="case-cols section-spacer">
             <div>
                 <h4 class="section-subheading">What I built</h4>
-                <p>I led a cross-team design initiative to build a scalable vision, focusing on core pillars, including:</p>
+                <p>I led a cross-team design initiative to build a scalable vision, focusing on core pillars, including:
+                </p>
                 <ul class="process-list">
                     <li><strong>Menu management:</strong> A hierarchical model for brand, regional, and local
                         publishing.
@@ -481,8 +508,11 @@
         <div class="case-cols section-spacer">
             <div>
                 <h4 class="section-subheading">Impact</h4>
-                <p>I presented the final vision to leadership alongside a phased roadmap, prioritizing key surfaces for development.</p>
-                <p>➀&nbsp;The vision helped unblock several stalled initiatives ➁&nbsp;Location groups received funding ➂&nbsp;Enterprise menus moved forward ➃&nbsp;Four teams gained a shared language and direction</p>
+                <p>I presented the final vision to leadership alongside a phased roadmap, prioritizing key surfaces for
+                    development.</p>
+                <p>➀&nbsp;The vision helped unblock several stalled initiatives</p>
+                <p> ➁&nbsp;Location groups received funding</p>
+                <p>➂&nbsp;Enterprise menus moved forward ➃&nbsp;Four teams gained a shared language and direction</p>
             </div>
             <div></div>
         </div>
