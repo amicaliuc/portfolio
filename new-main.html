@@ -62,14 +62,41 @@
             margin-bottom: 0;
         }
 
-        /* ── Caption colour on floor link hover ── */
-        .nm-caption,
-        .nm-below-caption {
-            transition: color 0.3s ease;
+        /* ── Allow text selection inside floor links ── */
+        a .nm-caption,
+        a .nm-below-caption {
+            user-select: text;
+            -webkit-user-select: text;
+            transition: opacity 0.3s ease;
         }
         a:hover .nm-caption,
         a:hover .nm-below-caption {
-            color: #FF5100;
+            opacity: 0.75;
+        }
+
+        /* ── Caption underline (always visible for linked floors) ── */
+        a .nm-caption,
+        a .nm-below-caption {
+            text-decoration: underline;
+            text-decoration-color: rgba(0,0,0,0.15);
+            text-decoration-thickness: 1px;
+            text-underline-offset: 4px;
+        }
+
+        /* ── Case pill ── */
+        .nm-case-pill {
+            display: inline-block;
+            padding: 1px 12px 2px;
+            border-radius: 100px;
+            border: 1px solid rgba(0,0,0,0.2);
+            font-size: 0.7em;
+            line-height: 1.5;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            margin-right: 10px;
+            vertical-align: middle;
+            text-decoration: none !important;
+            text-decoration-color: transparent !important;
         }
 
         /* ── Image hover zoom (contained within wrapper) ── */
@@ -78,7 +105,7 @@
             display: block;
         }
         a .nm-floor-inner img:hover {
-            transform: scale(1.07);
+            transform: scale(1.02);
         }
     </style>
 </head>
@@ -101,7 +128,7 @@
 
         <!-- ── Tagline ── -->
         <h3 style="max-width:700px;">
-            <strong>Anatolie Micaliuc</strong> I design products that scale: from zero to enterprise. Owned design at Square for Franchises ($&#10074;&#10074;&#10074;.6M GPV platform) and GoParrot ($50M exit).
+            <strong>Anatolie Micaliuc</strong> I design products that scale: from zero to enterprise. Owned design at Square for Franchises ($&#10074;&#10074;&#10074;.6M GPV platform) &amp; GoParrot ($50M exit).
 </h3>
 
         <!-- ════════════════ SECTION 1 ════════════════ -->
@@ -112,37 +139,37 @@
         </div>
 
         <!-- Floor 1 → vision.html -->
-        <a href="vision.html" style="text-decoration:none;color:inherit;display:block;">
+        <a href="vision.html" class="nm-floor-link" style="text-decoration:none;color:inherit;display:block;">
         <div class="nm-floor" style="margin-bottom:180px;">
             <div class="nm-floor-inner" data-height="700">
                 <img src="./img/1.png" style="position:absolute;left:0;top:0;width:545px;height:700px;object-fit:cover;border-radius:32px;">
                 <img src="./img/2.png" style="position:absolute;left:545px;top:0;width:415px;height:225px;object-fit:cover;border-radius:112.5px;">
                 <!-- absolute caption — font-size corrected by JS -->
-                <p class="nm-caption" style="left:576px;top:245px;width:369px;text-align:center;">
-                    Defining a North Star for an Enterprise Platform @Square • Soon</p>
+                <p class="nm-caption" style="left:565px;top:245px;width:375px;">
+                    <span class="nm-case-pill">case</span>Defining a North Star for an<br>Enterprise Platform @Square • Soon</p>
             </div>
         </div>
         </a>
 
         <!-- Floor 2 → checkout.html -->
-        <a href="checkout.html" style="text-decoration:none;color:inherit;display:block;">
+        <a href="checkout.html" class="nm-floor-link" style="text-decoration:none;color:inherit;display:block;">
         <div class="nm-floor" style="margin-bottom:180px;">
             <div class="nm-floor-inner" data-height="545">
                 <img src="./img/3.png" style="position:absolute;left:0;top:0;width:960px;height:545px;object-fit:cover;border-radius:0;" loading="lazy" decoding="async">
             </div>
-            <p class="nm-below-caption">Checkout flow redesign @Square</p>
+            <p class="nm-below-caption"><span class="nm-case-pill">case</span>Checkout flow redesign @Square</p>
         </div>
         </a>
 
         <!-- Floor 3 → royalty.html -->
-        <a href="royalty.html" style="text-decoration:none;color:inherit;display:block;">
+        <a href="royalty.html" class="nm-floor-link" style="text-decoration:none;color:inherit;display:block;">
         <div class="nm-floor" style="margin-bottom:100px;">
             <div class="nm-floor-inner" data-height="634">
                 <img src="./img/4.png" style="position:absolute;left:0;top:0;width:240px;height:240px;object-fit:cover;border-radius:32px;" loading="lazy" decoding="async">
                 <img src="./img/5.png" style="position:absolute;left:240px;top:0;width:535px;height:634px;object-fit:cover;border-radius:32px;" loading="lazy" decoding="async">
                 <!-- absolute caption — font-size corrected by JS -->
-                <p class="nm-caption" style="left:794px;top:0;width:177px;">
-                    Royalty calculation and collection @Square</p>
+                <p class="nm-caption" style="left:795px;top:0;width:145px;">
+                    <span class="nm-case-pill">case</span>Royalty calculation and collection @Square</p>
                 <img src="./img/6.png" style="position:absolute;left:775px;top:448px;width:186px;height:186px;object-fit:cover;border-radius:1000px;" loading="lazy" decoding="async">
             </div>
         </div>
@@ -294,6 +321,12 @@
                 inner.querySelectorAll('.nm-caption').forEach(function(cap) {
                     cap.style.fontSize = (bodyFontSize / zoom) + 'px';
                 });
+                inner.querySelectorAll('.nm-caption .nm-case-pill').forEach(function(pill) {
+                    pill.style.padding = (1/zoom) + 'px ' + (12/zoom) + 'px ' + (2/zoom) + 'px';
+                    pill.style.borderWidth = (1/zoom) + 'px';
+                    pill.style.borderRadius = (100/zoom) + 'px';
+                    pill.style.marginRight = (10/zoom) + 'px';
+                });
             });
         }
         scaleFloors();
@@ -316,8 +349,14 @@
                 canvas.width = container.offsetWidth;
                 canvas.height = container.offsetHeight;
             }
-            resizeCanvas();
             window.addEventListener('resize', resizeCanvas);
+
+            var footerImg = container.querySelector('img');
+            if (footerImg && footerImg.complete && footerImg.naturalHeight > 0) {
+                resizeCanvas();
+            } else if (footerImg) {
+                footerImg.addEventListener('load', resizeCanvas);
+            }
 
             var ctx = canvas.getContext('2d');
             var colors = ['#FF5100', '#FFCC00', '#00C8FF', '#FF2D78'];

@@ -40,7 +40,7 @@
         }
 
         .page-content {
-            margin-top: 24px;
+            margin-top: 20px;
             margin-left: 146px;
         }
 
@@ -71,6 +71,22 @@
             background: #f0f0f0;
             aspect-ratio: 4 / 3;
             width: 100%;
+        }
+
+        .blurred-img-wrap {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .blurred-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: blur(40px);
+            transform: scale(1.1);
+            display: block;
         }
 
         /* Break out of page-content to match main page full-width images */
@@ -149,12 +165,10 @@
             font-size: inherit;
             font-weight: 500;
             color: #000;
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-
-        .case-nav a:hover {
-            color: #FF5100;
+            text-decoration: underline;
+            text-decoration-color: rgba(0,0,0,0.15);
+            text-decoration-thickness: 1px;
+            text-underline-offset: 4px;
         }
 
         .case-nav .nav-prev::before {
@@ -196,7 +210,7 @@
 
             .page-content {
                 margin-top: 148px;
-                margin-left: 0 !important;
+                margin-left: 8px !important;
             }
 
             .top-right-content {
@@ -266,15 +280,9 @@
 
     <div class="page-content">
 
-        <!-- Author tagline -->
-        <h3 style="max-width: 700px; padding-bottom: 80px;"><strong>Anatolie Micaliuc</strong> I design products that
-            scale: from zero to enterprise. Owned design at Square for Franchises ($❚❚❚.6M GPV platform) and GoParrot
-            ($50M exit).</h3>
-
         <!-- Hero -->
         <div class="case-cols" style="margin-top: 0;">
             <div>
-                <span class="case-label" style="margin-top: 0;">Case</span>
                 <h1>Checkout Redesign</h1>
             </div>
             <div></div>
@@ -297,7 +305,9 @@
 
         <!-- Image -->
         <div class="full-bleed full-bleed-first">
-            <div class="img-placeholder"></div>
+            <div class="blurred-img-wrap">
+                <img src="./img/3.png" loading="lazy" decoding="async">
+            </div>
         </div>
 
         <!-- Process -->
@@ -318,7 +328,9 @@
 
         <!-- Image -->
         <div class="full-bleed">
-            <div class="img-placeholder"></div>
+            <div class="blurred-img-wrap">
+                <img src="./img/3.png" loading="lazy" decoding="async">
+            </div>
         </div>
 
         <!-- Design system challenge -->
@@ -333,7 +345,9 @@
 
         <!-- Image -->
         <div class="full-bleed">
-            <div class="img-placeholder"></div>
+            <div class="blurred-img-wrap">
+                <img src="./img/3.png" loading="lazy" decoding="async">
+            </div>
         </div>
 
         <!-- Outcome -->

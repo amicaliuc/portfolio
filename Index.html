@@ -73,9 +73,7 @@
         <div class="top-left-content">
         </div>
 
-        <h3 style="max-width: 700px; padding-bottom: 80px;"><strong>Anatolie Micaliuc</strong> I design products that
-            scale: from zero to enterprise. Owned design at Square for Franchises ($❚❚❚.6M GPV platform) and GoParrot
-            ($50M exit).</h3>
+        <h3 style="max-width: 700px; padding-bottom: 80px;"><strong>Anatolie Micaliuc</strong> I design products that scale: from zero to enterprise. Owned design at Square for Franchises ($❚❚❚.6M GPV platform) &amp; GoParrot ($50M exit).</h3>
 
         <div id="acquisition">
             <div style="max-width: 700px; padding-bottom: 80px;">
@@ -277,6 +275,80 @@
         }
     </script>
     <script src="./transitions.js"></script>
+
+    <script>
+        (function () {
+            if (!window.matchMedia('(pointer: fine)').matches) return;
+
+            const container = document.querySelector('.footerimg');
+            if (!container) return;
+
+            const canvas = document.createElement('canvas');
+            canvas.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:2;mix-blend-mode:multiply;';
+            container.style.position = 'relative';
+            container.appendChild(canvas);
+
+            function resizeCanvas() {
+                canvas.width = container.offsetWidth;
+                canvas.height = container.offsetHeight;
+            }
+
+            const img = container.querySelector('img');
+            if (img && img.complete) {
+                resizeCanvas();
+            } else if (img) {
+                img.addEventListener('load', resizeCanvas);
+            }
+
+            window.addEventListener('resize', resizeCanvas);
+
+            const ctx = canvas.getContext('2d');
+            const colors = ['#FF5100', '#FFCC00', '#00C8FF', '#FF2D78'];
+            let colorIndex = 0;
+            let lastPoint = null;
+            let moved = false;
+
+            function hexToRgba(hex, a) {
+                const r = parseInt(hex.slice(1, 3), 16);
+                const g = parseInt(hex.slice(3, 5), 16);
+                const b = parseInt(hex.slice(5, 7), 16);
+                return `rgba(${r},${g},${b},${a})`;
+            }
+
+            container.addEventListener('mousemove', function (e) {
+                moved = true;
+                const rect = container.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                if (lastPoint) {
+                    const dx = x - lastPoint.x;
+                    const dy = y - lastPoint.y;
+                    const len = Math.sqrt(dx * dx + dy * dy);
+                    if (len > 0) {
+                        const tip = 14;
+                        const px = (-dy / len) * tip;
+                        const py = (dx / len) * tip;
+                        ctx.beginPath();
+                        ctx.moveTo(lastPoint.x + px, lastPoint.y + py);
+                        ctx.lineTo(x + px, y + py);
+                        ctx.lineTo(x - px, y - py);
+                        ctx.lineTo(lastPoint.x - px, lastPoint.y - py);
+                        ctx.closePath();
+                        ctx.fillStyle = hexToRgba(colors[colorIndex], 0.68);
+                        ctx.fill();
+                    }
+                }
+                lastPoint = { x, y };
+            });
+
+            container.addEventListener('mouseleave', function () { lastPoint = null; });
+            container.addEventListener('mouseenter', function () { lastPoint = null; });
+            container.addEventListener('mousedown', function () { moved = false; });
+            container.addEventListener('mouseup', function () {
+                if (!moved) colorIndex = (colorIndex + 1) % colors.length;
+            });
+        })();
+    </script>
 
 </body>
 
