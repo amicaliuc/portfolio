@@ -84,7 +84,8 @@
             font-weight: 400;
             color: #000000;
             line-height: 115%;
-            padding-top: 4px;
+            margin-top: 0;
+            padding-top: 0;
         }
 
         .img-placeholder {
@@ -101,7 +102,7 @@
 
         .blurred-img-wrap {
             width: 100%;
-            aspect-ratio: 16 / 9;
+            height: calc(50vw - 10px);
             overflow: hidden;
             position: relative;
         }
@@ -203,6 +204,18 @@
 
         .case-nav .nav-next::after {
             content: ' →';
+        }
+
+        .section-subheading {
+            font-family: 'Stratos', 'Helvetica Neue', Arial, sans-serif;
+            font-size: inherit;
+            letter-spacing: normal;
+            color: #000;
+            font-weight: 700;
+            line-height: 125%;
+            margin: 0 0 12px 0;
+            max-width: 700px;
+            text-transform: none;
         }
 
         .process-list {
@@ -338,7 +351,7 @@
         <!-- Hero -->
         <div class="case-cols" style="margin-top: 0;">
             <div>
-                <h1>Royalty Fee Collection</h1>
+                <h1>Royalty Collection: From Spreadsheets to Native</h1>
                 <div class="case-meta">
                     <div>
                         <p class="meta-label">Scope</p>
@@ -363,87 +376,191 @@
         <div class="case-cols">
             <div>
                 <p>For franchisors, collecting royalties was a manual nightmare involving fragmented spreadsheets and
-                    third-party invoicing outside of Square. As a platform positioning itself as the "OS for
+                    third-party invoicing outside of Square. </p>
+                <p>As a platform positioning itself as the "OS for
                     Franchising," this was a critical gap. The challenge was to build a native calculation and
                     collection engine that could handle diverse business models without overcomplicating the UI.</p>
             </div>
-            <div>
-                <p class="pull-quote">Sellers needed a way to calculate and collect royalties directly inside franchise
-                    dashboard</p>
-            </div>
         </div>
 
-        <!-- Image -->
+        <!-- Image 1 -->
         <div class="full-bleed full-bleed-first">
-            <div class="blurred-img-wrap">
+            <div class="blurred-img-wrap"><div class="blurred-img-overlay"><span>Screens exist. NDA says shh.<br>Coming soon.</span></div>
                 <img src="./img/5.png" loading="lazy" decoding="async">
             </div>
         </div>
 
-        <!-- Research -->
+        <!-- Insights & Strategy -->
         <div class="case-cols section-spacer">
             <div>
-                <p>We ran customer interviews, synthesized all related requests. What became clear quickly: there's no
-                    single universal royalty formula, but there's one that covers most cases with small variations.</p>
-                <p>Some franchisors also wanted to automate everything, others send invoices manually. That shaped how
-                    flexible the system needed to be.</p>
+                <h4 class="section-subheading">Insights &amp; Strategy</h4>
+                <p>Through customer interviews, we identified two structural requirements:</p>
+                <ul class="process-list">
+                    <li><strong>Formula Flexibility:</strong> There is no "universal" royalty fee. We needed a core
+                        model (percentage of gross sales) with enough modularity to support flat fees and tiered
+                        structures later.</li>
+                    <li><strong>Automation vs. Control:</strong> Operators were split. The system had to support both
+                        fully automated scheduling and a "review-before-send" manual workflow.</li>
+                </ul>
             </div>
             <div>
-                <p class="pull-quote">What became clear quickly: there's no single universal royalty formula</p>
+                <p class="pull-quote">No universal royalty formula, but one model covers most cases</p>
             </div>
         </div>
 
-        <!-- Image -->
+        <!-- Image 2 -->
         <div class="full-bleed">
-            <div class="blurred-img-wrap">
+            <div class="blurred-img-wrap"><div class="blurred-img-overlay"><span>Screens exist. NDA says shh.<br>Coming soon.</span></div>
                 <img src="./img/4.png" loading="lazy" decoding="async">
             </div>
         </div>
 
-        <!-- Platform question -->
+        <!-- The Architectural Decision -->
         <div class="case-cols section-spacer">
             <div>
-                <p>Before solving the UX, we had to solve the platform question. Franchise Suite lived as a third-party
-                    product relative to Square Dashboard, which meant the core flow could live in several different
-                    places.</p>
-                <p>I designed and explored three options: a native Franchise Suite experience, a Square Dashboard-native
-                    experience, and a hybrid. Each had different trade-offs in technical lift, time, and user experience
-                    continuity.</p>
+                <h4 class="section-subheading">The Architectural Decision</h4>
+                <p>The real design problem was platform placement. I explored three strategic directions to determine
+                    where the feature should live within the Square ecosystem:</p>
+                <ul class="process-list">
+                    <li><strong>Option A (Native):</strong> Built entirely within Franchise Suite. Pro: Full UX
+                        control. Con: High engineering cost (building payments from scratch).</li>
+                    <li><strong>Option B (Square-Native):</strong> Leveraging Square's existing invoice tools. Pro:
+                        Low lift. Con: Disjointed UX for franchise operators.</li>
+                    <li><strong>Option C (Pragmatic Hybrid):</strong> [Selected] Configuration lives in Franchise
+                        Suite; execution is powered by Square's invoicing rails.</li>
+                </ul>
+                <p><strong>Result:</strong> We chose Option C to balance speed-to-market with a coherent user
+                    experience, focusing the MVP on the most common royalty models.</p>
             </div>
             <div>
-                <p class="pull-quote">Each solution had different trade-offs in technical lift, time, and user
-                    experience continuity</p>
+                <p class="pull-quote">The design challenge wasn't the UI. It was defining which product owned which
+                    part of the journey</p>
             </div>
         </div>
 
-        <!-- Image -->
+        <!-- Image 3 -->
         <div class="full-bleed">
-            <div class="blurred-img-wrap">
+            <div class="blurred-img-wrap"><div class="blurred-img-overlay"><span>Screens exist. NDA says shh.<br>Coming soon.</span></div>
                 <img src="./img/5.png" loading="lazy" decoding="async">
             </div>
         </div>
 
-        <!-- Outcome -->
+        <!-- The Solution -->
         <div class="case-cols section-spacer">
             <div>
-                <p>We landed on a pragmatic hybrid: royalty configuration inside Franchise Suite, collection powered by
-                    Square's existing invoice infrastructure.</p>
-                <p>When additional development capacity wasn't available on the Square invoicing side, we scoped to a
-                    lightweight version covering the most common royalty model and delivering core value without the
-                    full feature set.</p>
-                <p>Users responded well, adoption rate hit 26% in first weeks. We iterated from there, adding things
-                    like automated deductions based on their feedback.</p>
-                <p>More importantly, it unblocked strategic deals. Royalty collection was a deal-breaker category for
-                    enterprise prospects — having it meant we could close accounts we couldn't before.</p>
+                <h4 class="section-subheading">The Solution</h4>
+                <p>I designed a unified configuration interface where franchisors set their rules once. The system
+                    automatically calculates dues based on real-time sales data and triggers Square's invoicing engine.
+                </p>
+                <ul class="process-list">
+                    <li><strong>Shipped:</strong> Percentage-based royalties, automated/manual toggle, and a clear
+                        audit trail.</li>
+                    <li><strong>Iteration:</strong> Post-launch data prioritized "automated deductions" as the next
+                        high-value update.</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Impact -->
+        <div class="case-cols section-spacer">
+            <div>
+                <h4 class="section-subheading">Impact</h4>
+                <p>➀ Adoption: 26% of target users onboarded within the first weeks — a high rate for enterprise
+                    workflow changes.<br>
+                    ➁ Sales Enablement: Successfully unblocked several "deal-breaker" enterprise accounts that
+                    required native royalty management to sign.<br>
+                    ➂ Efficiency: Replaced hours of manual spreadsheet work with a "set-and-forget" native
+                    infrastructure.</p>
             </div>
             <div>
-                <p class="pull-quote">Users responded well, adoption rate hit 26% in first weeks</p>
+                <p class="pull-quote">26% of target users onboarded within the first weeks</p>
             </div>
         </div>
 
+        <!-- Final image with marker effect -->
+        <div class="full-bleed" id="royalty-marker" style="position:relative;cursor:crosshair;">
+            <div class="blurred-img-wrap"><div class="blurred-img-overlay"><span>Screens exist. NDA says shh.<br>Coming soon.</span></div>
+                <img src="./img/5.png" id="royalty-marker-img" loading="lazy" decoding="async"
+                    style="filter:none;transform:none;">
+            </div>
+        </div>
 
     </div>
+
     <script src="./transitions.js"></script>
+
+    <script>
+        (function () {
+            if (!window.matchMedia('(pointer: fine)').matches) return;
+
+            var container = document.getElementById('royalty-marker');
+            if (!container) return;
+
+            var canvas = document.createElement('canvas');
+            canvas.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:2;mix-blend-mode:multiply;';
+            container.appendChild(canvas);
+
+            function resizeCanvas() {
+                canvas.width = container.offsetWidth;
+                canvas.height = container.offsetHeight;
+            }
+            window.addEventListener('resize', resizeCanvas);
+
+            var markerImg = document.getElementById('royalty-marker-img');
+            if (markerImg && markerImg.complete && markerImg.naturalHeight > 0) {
+                resizeCanvas();
+            } else if (markerImg) {
+                markerImg.addEventListener('load', resizeCanvas);
+            }
+
+            var ctx = canvas.getContext('2d');
+            var colors = ['#FF5100', '#FFCC00', '#00C8FF', '#FF2D78'];
+            var colorIndex = 0;
+            var lastPoint = null;
+            var moved = false;
+
+            function hexToRgba(hex, a) {
+                var r = parseInt(hex.slice(1, 3), 16);
+                var g = parseInt(hex.slice(3, 5), 16);
+                var b = parseInt(hex.slice(5, 7), 16);
+                return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
+            }
+
+            container.addEventListener('mousemove', function (e) {
+                moved = true;
+                var rect = container.getBoundingClientRect();
+                var x = e.clientX - rect.left;
+                var y = e.clientY - rect.top;
+                if (lastPoint) {
+                    var dx = x - lastPoint.x;
+                    var dy = y - lastPoint.y;
+                    var len = Math.sqrt(dx * dx + dy * dy);
+                    if (len > 0) {
+                        var tip = 14;
+                        var px = (-dy / len) * tip;
+                        var py = (dx / len) * tip;
+                        ctx.beginPath();
+                        ctx.moveTo(lastPoint.x + px, lastPoint.y + py);
+                        ctx.lineTo(x + px, y + py);
+                        ctx.lineTo(x - px, y - py);
+                        ctx.lineTo(lastPoint.x - px, lastPoint.y - py);
+                        ctx.closePath();
+                        ctx.fillStyle = hexToRgba(colors[colorIndex], 0.68);
+                        ctx.fill();
+                    }
+                }
+                lastPoint = { x: x, y: y };
+            });
+
+            container.addEventListener('mouseleave', function () { lastPoint = null; });
+            container.addEventListener('mouseenter', function () { lastPoint = null; });
+            container.addEventListener('mousedown', function () { moved = false; });
+            container.addEventListener('mouseup', function () {
+                if (!moved) colorIndex = (colorIndex + 1) % colors.length;
+            });
+        })();
+    </script>
 
 </body>
 
