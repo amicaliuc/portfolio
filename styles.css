@@ -184,8 +184,10 @@ li {
     width: 133px;
     /* Adjust the size of the image */
     height: auto;
-
+    border-radius: 0;
+    transition: border-radius 0.25s ease;
 }
+
 
 .top-right-content {
     display: flex;
