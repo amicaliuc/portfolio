@@ -178,7 +178,7 @@
 
     <!-- ── Top bar ── -->
     <div class="top-bar">
-        <img src="./img/anatolie.webp" class="sticky-image">
+        <img src="./img/anatolie.webp" class="sticky-image" width="263" height="208">
         <div class="top-right-content">
             <div class="nav-links">
                 <a href="#section1">Strategy</a>
@@ -623,153 +623,9 @@
 
     <script src="./transitions.js" defer></script>
 
-    <!-- ── Pill physics (Floor 5 / Conspectus) ── -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
-    <script>
-        (function () {
-            'use strict';
-            const cv = document.getElementById('pill-physics');
-            if (!cv) return;
-            const { Engine, Bodies, Body, Composite } = Matter;
-
-            const W = 185, H = 331, CR = W / 2, SH = H - CR * 2;
-            const DPR = Math.min(window.devicePixelRatio || 1, 2);
-
-            /* ── desktop canvas ── */
-            cv.width = W * DPR;
-            cv.height = H * DPR;
-            const ctx = cv.getContext('2d');
-            ctx.scale(DPR, DPR);
-
-            /* ── mobile canvas ── */
-            const cvM = document.getElementById('pill-physics-mobile');
-            let ctxM = null;
-            if (cvM) {
-                cvM.width = W * DPR;
-                cvM.height = H * DPR;
-                ctxM = cvM.getContext('2d');
-                ctxM.scale(DPR, DPR);
-            }
-
-            const SVG_FILES = [
-                './img/Group 54.svg', './img/Group 55.svg',
-                './img/Group 58.svg', './img/Group 59.svg',
-                './img/Group 60.svg', './img/Group 61.svg',
-                './img/Group 65.svg', './img/Group 66.svg',
-                './img/Group 67.svg', './img/Group 68.svg',
-                './img/Group 87.svg', './img/Group 88.svg',
-            ];
-            const IMG_R = 22.5, N = SVG_FILES.length;
-            const imgs = SVG_FILES.map(src => { const i = new Image(); i.src = src; return i; });
-
-            const engine = Engine.create({ gravity: { x: 0, y: 2.2 } });
-
-            const GAP = 3, WT = 20, SEGS = 32;
-            const innerR = CR - GAP, arcR = innerR + WT / 2;
-            const step = Math.PI / SEGS, sLen = 2 * arcR * Math.sin(step / 2) + 2;
-            const wOpt = { isStatic: true, friction: 0.05, restitution: 0.65 };
-
-            const walls = [
-                Bodies.rectangle(GAP - WT / 2, H / 2, WT, SH + WT, wOpt),
-                Bodies.rectangle(W - GAP + WT / 2, H / 2, WT, SH + WT, wOpt),
-            ];
-            for (let i = 0; i < SEGS; i++) {
-                const at = Math.PI + step * (i + 0.5);
-                walls.push(Bodies.rectangle(W / 2 + arcR * Math.cos(at), CR + arcR * Math.sin(at),
-                    sLen, WT, { ...wOpt, angle: at + Math.PI / 2 }));
-                const ab = step * (i + 0.5);
-                walls.push(Bodies.rectangle(W / 2 + arcR * Math.cos(ab), (H - CR) + arcR * Math.sin(ab),
-                    sLen, WT, { ...wOpt, angle: ab + Math.PI / 2 }));
-            }
-            Composite.add(engine.world, walls);
-
-            const bodies = Array.from({ length: N }, (_, i) => {
-                const col = i % 3, row = Math.floor(i / 3);
-                const x = W * 0.18 + col * (W * 0.32) + (Math.random() - 0.5) * 8;
-                const y = CR * 0.5 + row * (IMG_R * 2.8) + (Math.random() - 0.5) * 6;
-                const b = Bodies.circle(x, y, IMG_R, {
-                    restitution: 0.55, friction: 0.04, frictionAir: 0.01, density: 0.003,
-                });
-                Body.setVelocity(b, { x: (Math.random() - 0.5) * 1.5, y: Math.random() * 2 });
-                return b;
-            });
-            Composite.add(engine.world, bodies);
-
-            let mx = -9999, my = -9999;
-
-            /* ── desktop: mouse ── */
-            cv.addEventListener('mousemove', e => {
-                const r = cv.getBoundingClientRect();
-                mx = (e.clientX - r.left) * (W / r.width);
-                my = (e.clientY - r.top) * (H / r.height);
-            });
-            cv.addEventListener('mouseleave', () => { mx = -9999; my = -9999; });
-
-            /* ── mobile: touch ── */
-            if (cvM) {
-                const touchPos = e => {
-                    const r = cvM.getBoundingClientRect();
-                    const t = e.touches[0] || e.changedTouches[0];
-                    return {
-                        x: (t.clientX - r.left) * (W / r.width),
-                        y: (t.clientY - r.top) * (H / r.height),
-                    };
-                };
-                cvM.addEventListener('touchstart', e => {
-                    e.preventDefault();
-                    const p = touchPos(e); mx = p.x; my = p.y;
-                }, { passive: false });
-                cvM.addEventListener('touchmove', e => {
-                    e.preventDefault();
-                    const p = touchPos(e); mx = p.x; my = p.y;
-                }, { passive: false });
-                cvM.addEventListener('touchend', () => { mx = -9999; my = -9999; });
-            }
-
-            const REPEL_R = 80, REPEL_K = 0.32;
-            let lastT = performance.now();
-            (function tick(now) {
-                requestAnimationFrame(tick);
-                const dt = Math.min(now - lastT, 50); lastT = now;
-                bodies.forEach(b => {
-                    const dx = b.position.x - mx, dy = b.position.y - my;
-                    const d = Math.hypot(dx, dy);
-                    if (d < REPEL_R && d > 0.5) {
-                        const t = 1 - d / REPEL_R;
-                        const s = REPEL_K * t * t * t * (1 + 4 * t * t);
-                        Body.applyForce(b, b.position, { x: (dx / d) * s, y: (dy / d) * s });
-                    }
-                });
-                Engine.update(engine, dt);
-                drawTo(ctx);
-                if (ctxM) drawTo(ctxM);
-            })(performance.now());
-
-            function drawTo(c) {
-                c.clearRect(0, 0, W, H);
-                c.save();
-                pillPath(c); c.fillStyle = '#ebebeb'; c.fill(); c.clip();
-                imgs.forEach((img, i) => {
-                    if (!img.complete || !img.naturalWidth) return;
-                    const b = bodies[i];
-                    c.save();
-                    c.translate(b.position.x, b.position.y);
-                    c.rotate(b.angle);
-                    c.drawImage(img, -IMG_R, -IMG_R, IMG_R * 2, IMG_R * 2);
-                    c.restore();
-                });
-                c.restore();
-            }
-
-            function pillPath(c) {
-                c.beginPath();
-                c.arc(W / 2, CR, CR, Math.PI, 0);
-                c.lineTo(W, H - CR);
-                c.arc(W / 2, H - CR, CR, 0, Math.PI);
-                c.closePath();
-            }
-        })();
-    </script>
+    <!-- ── Pill physics — both deferred so they execute in order after DOM ── -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js" defer></script>
+    <script src="./pill-physics.js" defer></script>
 
 </body>
 
