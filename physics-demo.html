@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pill Physics</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: #CCCAC7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        #pill {
+            display: block;
+            border-radius: 9999px;
+            cursor: crosshair;
+        }
+    </style>
+</head>
+<body>
+<canvas id="pill"></canvas>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+<script>
+(function () {
+    'use strict';
+    const { Engine, Bodies, Body, Composite } = Matter;
+
+    /* ── pill geometry (physics coords) ── */
+    const W = 185, H = 331;
+    const CR = W / 2;          // cap radius = 92.5
+    const SH = H - CR * 2;     // straight section = 146
+
+    /* ── canvas (displayed at 2× size) ── */
+    const cv   = document.getElementById('pill');
+    const DPR  = Math.min(window.devicePixelRatio || 1, 2);
+    const DISP = 2;
+    cv.width   = W * DPR;
+    cv.height  = H * DPR;
+    cv.style.width  = W * DISP + 'px';
+    cv.style.height = H * DISP + 'px';
+    const ctx = cv.getContext('2d');
+    ctx.scale(DPR, DPR);
+
+    /* ── SVG icons ── */
+    const SVG_FILES = [
+        './img/Group 54.svg',
+        './img/Group 55.svg',
+        './img/Group 58.svg',
+        './img/Group 59.svg',
+        './img/Group 60.svg',
+        './img/Group 61.svg',
+        './img/Group 65.svg',
+        './img/Group 66.svg',
+        './img/Group 67.svg',
+        './img/Group 68.svg',
+        './img/Group 87.svg',
+        './img/Group 88.svg',
+    ];
+    const IMG_R = 22.5;   // all icons same radius
+    const N     = SVG_FILES.length;
+
+    const imgs = SVG_FILES.map(src => {
+        const img = new Image();
+        img.src = src;
+        return img;
+    });
+
+    /* ── engine ── */
+    const engine = Engine.create({ gravity: { x: 0, y: 2.2 } });
+
+    /* ── walls: icons stay 3 px from pill edge ── */
+    const GAP  = 3;
+    const WT   = 20;
+    const SEGS = 32;
+    const innerR = CR - GAP;          // effective inner radius for caps
+    const arcR   = innerR + WT / 2;
+    const step   = Math.PI / SEGS;
+    const sLen   = 2 * arcR * Math.sin(step / 2) + 2;
+    const wOpt   = { isStatic: true, friction: 0.05, restitution: 0.65 };
+
+    const walls = [
+        Bodies.rectangle(GAP - WT / 2,       H / 2, WT, SH + WT, wOpt),  // left
+        Bodies.rectangle(W - GAP + WT / 2,   H / 2, WT, SH + WT, wOpt),  // right
+    ];
+    for (let i = 0; i < SEGS; i++) {
+        const at = Math.PI + step * (i + 0.5);   // top cap
+        walls.push(Bodies.rectangle(
+            W / 2 + arcR * Math.cos(at), CR    + arcR * Math.sin(at),
+            sLen, WT, { ...wOpt, angle: at + Math.PI / 2 }
+        ));
+        const ab = step * (i + 0.5);             // bottom cap
+        walls.push(Bodies.rectangle(
+            W / 2 + arcR * Math.cos(ab), (H-CR) + arcR * Math.sin(ab),
+            sLen, WT, { ...wOpt, angle: ab + Math.PI / 2 }
+        ));
+    }
+    Composite.add(engine.world, walls);
+
+    /* ── icon bodies in 3-column staggered grid ── */
+    const bodies = Array.from({ length: N }, (_, i) => {
+        const col = i % 3, row = Math.floor(i / 3);
+        const x = W * 0.18 + col * (W * 0.32) + (Math.random() - 0.5) * 8;
+        const y = CR * 0.5  + row * (IMG_R * 2.8) + (Math.random() - 0.5) * 6;
+        const b = Bodies.circle(x, y, IMG_R, {
+            restitution: 0.55, friction: 0.04,
+            frictionAir: 0.01, density: 0.003,
+        });
+        Body.setVelocity(b, { x: (Math.random() - 0.5) * 1.5, y: Math.random() * 2 });
+        return b;
+    });
+    Composite.add(engine.world, bodies);
+
+    /* ── mouse ── */
+    let mx = -9999, my = -9999;
+    cv.addEventListener('mousemove', e => {
+        const r = cv.getBoundingClientRect();
+        mx = (e.clientX - r.left) / DISP;
+        my = (e.clientY - r.top)  / DISP;
+    });
+    cv.addEventListener('mouseleave', () => { mx = -9999; my = -9999; });
+
+    /* ── loop ── */
+    //
+    // Repulsion: inverse-magnet feel.
+    // Even at REPEL_R distance the icon already "feels" it,
+    // but near contact (d ≈ IMG_R + 5) force spikes sharply.
+    //
+    const REPEL_R = 80;
+    const REPEL_K = 0.32;
+
+    let lastT = performance.now();
+    (function tick(now) {
+        requestAnimationFrame(tick);
+        const dt = Math.min(now - lastT, 50); lastT = now;
+
+        bodies.forEach(b => {
+            const dx = b.position.x - mx;
+            const dy = b.position.y - my;
+            const d  = Math.hypot(dx, dy);
+            if (d < REPEL_R && d > 0.5) {
+                const t = 1 - d / REPEL_R;
+                // t³·(1 + 4t²) — gentle at distance, spikes sharply near contact
+                const strength = REPEL_K * t * t * t * (1 + 4 * t * t);
+                Body.applyForce(b, b.position, {
+                    x: (dx / d) * strength,
+                    y: (dy / d) * strength,
+                });
+            }
+        });
+
+        Engine.update(engine, dt);
+        draw();
+    })(performance.now());
+
+    /* ── draw ── */
+    function draw() {
+        ctx.clearRect(0, 0, W, H);
+
+        ctx.save();
+        pillPath();
+        ctx.fillStyle = '#ebebeb';
+        ctx.fill();
+        ctx.clip();
+
+        imgs.forEach((img, i) => {
+            if (!img.complete || !img.naturalWidth) return;
+            const b = bodies[i];
+            ctx.save();
+            ctx.translate(b.position.x, b.position.y);
+            ctx.rotate(b.angle);
+            ctx.drawImage(img, -IMG_R, -IMG_R, IMG_R * 2, IMG_R * 2);
+            ctx.restore();
+        });
+
+        ctx.restore();
+    }
+
+    function pillPath() {
+        ctx.beginPath();
+        ctx.arc(W / 2, CR,     CR, Math.PI, 0);
+        ctx.lineTo(W,  H - CR);
+        ctx.arc(W / 2, H - CR, CR, 0, Math.PI);
+        ctx.closePath();
+    }
+})();
+</script>
+</body>
+</html>

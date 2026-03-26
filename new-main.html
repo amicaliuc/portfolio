@@ -28,7 +28,7 @@
 
         /* ── Section headers ── */
         .nm-section-header {
-            padding-top: 280px;
+            padding-top: 240px;
             margin-bottom: 80px;
             max-width: 700px;
         }
@@ -69,6 +69,7 @@
             -webkit-user-select: text;
             transition: opacity 0.3s ease;
         }
+
         a:hover .nm-caption,
         a:hover .nm-below-caption {
             opacity: 0.75;
@@ -78,7 +79,7 @@
         a .nm-caption,
         a .nm-below-caption {
             text-decoration: underline;
-            text-decoration-color: rgba(0,0,0,0.15);
+            text-decoration-color: rgba(0, 0, 0, 0.15);
             text-decoration-thickness: 1px;
             text-underline-offset: 4px;
         }
@@ -88,7 +89,7 @@
             display: inline-block;
             padding: 1px 12px 2px;
             border-radius: 100px;
-            border: 1px solid rgba(0,0,0,0.2);
+            border: 1px solid rgba(0, 0, 0, 0.2);
             font-size: 0.7em;
             line-height: 1.5;
             font-weight: 500;
@@ -104,8 +105,71 @@
             transition: transform 0.4s ease;
             display: block;
         }
+
         a .nm-floor-inner img:hover {
             transform: scale(1.02);
+        }
+
+        /* ── Mobile floor layout ── */
+        .nm-mobile-img {
+            display: block;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .nm-floor-mobile {
+            display: none;
+        }
+
+        .nm-mobile-caption {
+            display: none;
+        }
+
+        @media screen and (max-width: 768px) {
+            .nm-floor-inner {
+                display: none;
+            }
+
+            .nm-floor-mobile {
+                display: block;
+            }
+
+            .nm-desktop-caption {
+                display: none !important;
+            }
+
+            .nm-mobile-caption {
+                display: block;
+            }
+
+            .nm-below-caption {
+                margin-left: 0 !important;
+            }
+
+            .nm-floor {
+                margin-bottom: 80px !important;
+            }
+
+            .nm-section-header {
+                padding-top: 60px !important;
+                margin-bottom: 40px;
+            }
+        }
+
+        @media screen and (max-width: 1200px) {
+            .nm-content {
+                margin-left: 0 !important;
+                margin-top: 148px;
+            }
+
+            .nm-floor {
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .footerimg {
+                margin-left: 0 !important;
+            }
         }
     </style>
 </head>
@@ -128,156 +192,306 @@
 
         <!-- ── Tagline ── -->
         <h3 style="max-width:700px;">
-            <strong>Anatolie Micaliuc</strong> I design products that scale: from zero to enterprise. Owned design at Square for Franchises ($&#10074;&#10074;&#10074;.6M GPV platform) &amp; GoParrot ($50M exit).
-</h3>
+            <strong>Anatolie Micaliuc</strong> I design products that scale: from zero to enterprise. Owned design at
+            Square for Franchises ($&#10074;&#10074;&#10074;.6M GPV platform) &amp;&nbsp;GoParrot ($50M exit).
+        </h3>
 
         <!-- ════════════════ SECTION 1 ════════════════ -->
         <div class="nm-section-header">
-            <h1>Section 1. Design strategy &amp; integration</h1>
-            <p>Supported GoParrot's acquisition process and helped with design migration. Post-acquisition shaped the
-                long-term vision and designed the enterprise product in Square.</p>
+            <h1>➀ Enterprise Systems: Scaling Post-Acquisition Vision</h1>
+            <p>At Square I designed the enterprise product. From defining
+                a north star to rebuilding checkout that was losing &#10074;&#10074;% of
+                orders
+                to royalty
+                infrastructure that closed deals we couldn't before. Dozens of shipped features, four product teams, one
+                platform.</p>
         </div>
 
         <!-- Floor 1 → vision.html -->
         <a href="vision.html" class="nm-floor-link" style="text-decoration:none;color:inherit;display:block;">
-        <div class="nm-floor" style="margin-bottom:180px;">
-            <div class="nm-floor-inner" data-height="700">
-                <img src="./img/1.png" style="position:absolute;left:0;top:0;width:545px;height:700px;object-fit:cover;border-radius:32px;">
-                <img src="./img/2.png" style="position:absolute;left:545px;top:0;width:415px;height:225px;object-fit:cover;border-radius:112.5px;">
-                <!-- absolute caption — font-size corrected by JS -->
-                <p class="nm-caption" style="left:565px;top:245px;width:375px;">
-                    <span class="nm-case-pill">case</span>Defining a North Star for an<br>Enterprise Platform @Square • Soon</p>
+            <div class="nm-floor" style="margin-bottom:180px;">
+                <div class="nm-floor-inner" data-height="700">
+                    <img src="./img/1.png"
+                        style="position:absolute;left:0;top:0;width:545px;height:700px;object-fit:cover;border-radius:32px;">
+                    <img src="./img/2.png"
+                        style="position:absolute;left:545px;top:0;width:415px;height:225px;object-fit:cover;border-radius:112.5px;">
+                    <!-- absolute caption — font-size corrected by JS -->
+                    <p class="nm-caption" style="left:565px;top:245px;width:375px;">
+                        <span class="nm-case-pill">case</span>Defining a North Star for an<br>Enterprise Platform
+
+                    </p>
+                </div>
+                <div class="nm-floor-mobile">
+                    <img src="./img/1.png" class="nm-mobile-img" style="aspect-ratio:335/430;border-radius:32px;"
+                        loading="lazy">
+                    <img src="./img/2.png" class="nm-mobile-img"
+                        style="aspect-ratio:335/182;border-radius:50vw;" loading="lazy">
+                </div>
+                <p class="nm-below-caption nm-mobile-caption"><span class="nm-case-pill">case</span>Defining a North
+                    Star for an Enterprise Platform</p>
             </div>
-        </div>
         </a>
 
         <!-- Floor 2 → checkout.html -->
         <a href="checkout.html" class="nm-floor-link" style="text-decoration:none;color:inherit;display:block;">
-        <div class="nm-floor" style="margin-bottom:180px;">
-            <div class="nm-floor-inner" data-height="545">
-                <img src="./img/3.png" style="position:absolute;left:0;top:0;width:960px;height:545px;object-fit:cover;border-radius:0;" loading="lazy" decoding="async">
+            <div class="nm-floor" style="margin-bottom:180px;">
+                <div class="nm-floor-inner" data-height="545">
+                    <img src="./img/3.png"
+                        style="position:absolute;left:0;top:0;width:960px;height:545px;object-fit:cover;border-radius:0;"
+                        loading="lazy" decoding="async">
+                </div>
+                <div class="nm-floor-mobile">
+                    <img src="./img/3.png" class="nm-mobile-img" style="aspect-ratio:335/190;border-radius:0;"
+                        loading="lazy">
+                </div>
+                <p class="nm-below-caption"><span class="nm-case-pill">case</span>Rebuilding a Checkout That Was Losing
+                    &#10074;&#10074;% of Orders</p>
             </div>
-            <p class="nm-below-caption"><span class="nm-case-pill">case</span>Checkout flow redesign @Square</p>
-        </div>
         </a>
 
         <!-- Floor 3 → royalty.html -->
         <a href="royalty.html" class="nm-floor-link" style="text-decoration:none;color:inherit;display:block;">
-        <div class="nm-floor" style="margin-bottom:100px;">
-            <div class="nm-floor-inner" data-height="634">
-                <img src="./img/4.png" style="position:absolute;left:0;top:0;width:240px;height:240px;object-fit:cover;border-radius:32px;" loading="lazy" decoding="async">
-                <img src="./img/5.png" style="position:absolute;left:240px;top:0;width:535px;height:634px;object-fit:cover;border-radius:32px;" loading="lazy" decoding="async">
-                <!-- absolute caption — font-size corrected by JS -->
-                <p class="nm-caption" style="left:795px;top:0;width:145px;">
-                    <span class="nm-case-pill">case</span>Royalty calculation and collection @Square</p>
-                <img src="./img/6.png" style="position:absolute;left:775px;top:448px;width:186px;height:186px;object-fit:cover;border-radius:1000px;" loading="lazy" decoding="async">
+            <div class="nm-floor" style="margin-bottom:100px;">
+                <div class="nm-floor-inner" data-height="634">
+                    <img src="./img/4.png"
+                        style="position:absolute;left:0;top:0;width:240px;height:240px;object-fit:cover;border-radius:32px;"
+                        loading="lazy" decoding="async">
+                    <img src="./img/5.png"
+                        style="position:absolute;left:240px;top:0;width:535px;height:634px;object-fit:cover;border-radius:32px;"
+                        loading="lazy" decoding="async">
+                    <!-- absolute caption — font-size corrected by JS -->
+                    <p class="nm-caption" style="left:795px;top:0;width:145px;">
+                        <span class="nm-case-pill">case</span>Royalty Collection: From Spreadsheets to Native
+                    </p>
+                    <img src="./img/6.png"
+                        style="position:absolute;left:775px;top:448px;width:186px;height:186px;object-fit:cover;border-radius:1000px;"
+                        loading="lazy" decoding="async">
+                </div>
+                <div class="nm-floor-mobile">
+                    <img src="./img/4.png" class="nm-mobile-img" style="aspect-ratio:1/1;border-radius:32px;width:53%;"
+                        loading="lazy">
+                    <img src="./img/5.png" class="nm-mobile-img" style="aspect-ratio:335/397;border-radius:32px;"
+                        loading="lazy">
+                    <img src="./img/6.png" class="nm-mobile-img"
+                        style="aspect-ratio:1/1;border-radius:1000px;width:50%;margin-left:auto;" loading="lazy">
+                </div>
+                <p class="nm-below-caption nm-mobile-caption"><span class="nm-case-pill">case</span>Royalty Collection:
+                    From Spreadsheets to Native</p>
             </div>
-        </div>
         </a>
 
         <!-- ════════════════ SECTION 2 ════════════════ -->
         <div class="nm-section-header" style="padding-top:100px;">
-            <h1>Section 2. Design support for GP</h1>
-            <p>Supported GoParrot's acquisition process and helped with design migration. Post-acquisition shaped the
-                long-term vision and designed the enterprise product in Square.</p>
+            <h1>➁ Startups & 0-to-1: From Raw Idea to 3x MRR Growth</h1>
+            <p>Early-stage work is a different discipline. There's no existing system to design within: you're figuring
+                out the product, the user, and the business model at the same time.</p>
+            <p> I've helped startups turn ideas into
+                something real: first interfaces, design systems built to last, MVPs that were honest about what they
+                were testing. GoParrot started this way before becoming a $50M exit.</p>
         </div>
 
         <!-- Floor 4 + two captions -->
         <div class="nm-floor" style="margin-bottom:180px;">
             <div class="nm-floor-inner" data-height="545">
-                <img src="./img/7.png" style="position:absolute;left:0;top:0;width:470px;height:545px;object-fit:cover;border-radius:32px;" loading="lazy" decoding="async">
-                <img src="./img/8.png" style="position:absolute;left:490px;top:0;width:470px;height:545px;object-fit:cover;border-radius:0;" loading="lazy" decoding="async">
+                <img src="./img/7.png"
+                    style="position:absolute;left:0;top:0;width:470px;height:545px;object-fit:cover;border-radius:32px;"
+                    loading="lazy" decoding="async">
+                <img src="./img/8.png"
+                    style="position:absolute;left:490px;top:0;width:470px;height:545px;object-fit:cover;border-radius:0;"
+                    loading="lazy" decoding="async">
             </div>
-            <div style="display:flex;margin-top:20px;">
-                <p class="nm-below-caption" style="margin-top:0;flex:0 0 51.04%;">Superlegal AI • Soon</p>
-                <p class="nm-below-caption" style="margin-top:0;">White label app @GoParrot</p>
+            <div class="nm-floor-mobile">
+                <img src="./img/7.png" class="nm-mobile-img" style="aspect-ratio:335/388;border-radius:32px;"
+                    loading="lazy">
+                <p class="nm-below-caption" style="margin-top:20px;">Superlegal. AI pivot in 72 hours • Soon</p>
+                <img src="./img/8.png" class="nm-mobile-img"
+                    style="aspect-ratio:335/388;border-radius:0;margin-top:80px;" loading="lazy">
+                <p class="nm-below-caption" style="margin-top:20px;">GoParrot white label. Scaling the F&B ecosystem</p>
+            </div>
+            <div class="nm-desktop-caption" style="display:flex;margin-top:20px;">
+                <p class="nm-below-caption" style="margin-top:0;flex:0 0 51.04%;">Superlegal. AI pivot in 72 hours •
+                    Soon</p>
+                <p class="nm-below-caption" style="margin-top:0;">GoParrot white label. Scaling the F&B ecosystem</p>
             </div>
         </div>
 
         <!-- Floor 5 + caption -->
         <div class="nm-floor" style="margin-bottom:180px;">
             <div class="nm-floor-inner" data-height="545">
-                <img src="./img/9.png" style="position:absolute;left:0;top:0;width:185px;height:331px;object-fit:cover;border-radius:1000px;" loading="lazy" decoding="async">
-                <img src="./img/10.png" style="position:absolute;left:185px;top:0;width:775px;height:545px;object-fit:cover;border-radius:0;" loading="lazy" decoding="async">
+                <canvas id="pill-physics"
+                    style="position:absolute;left:0;top:0;width:185px;height:331px;border-radius:1000px;cursor:crosshair;display:block;"></canvas>
+                <img src="./img/10.png"
+                    style="position:absolute;left:185px;top:0;width:775px;height:545px;object-fit:cover;border-radius:0;"
+                    loading="lazy" decoding="async">
             </div>
-            <p class="nm-below-caption" style="margin-left:19.27%;">Conspectus v2 • Soon</p>
+            <div class="nm-floor-mobile">
+                <canvas id="pill-physics-mobile" class="nm-mobile-img"
+                    style="aspect-ratio:185/331;border-radius:1000px;width:49%;touch-action:none;cursor:crosshair;"></canvas>
+                <img src="./img/10.png" class="nm-mobile-img" style="aspect-ratio:335/236;border-radius:0;"
+                    loading="lazy">
+            </div>
+            <p class="nm-below-caption" style="margin-left:19.27%;">Conspectus v2. Knowledge management reimagined •
+                Soon
+            </p>
         </div>
 
         <!-- Floor 6 + caption -->
         <div class="nm-floor" style="margin-bottom:180px;">
             <div class="nm-floor-inner" data-height="620">
-                <img src="./img/11.png" style="position:absolute;left:0;top:0;width:490px;height:620px;object-fit:cover;border-radius:32px;" loading="lazy" decoding="async">
-                <img src="./img/12.png" style="position:absolute;left:655px;top:0;width:305px;height:301px;object-fit:cover;border-radius:32px;" loading="lazy" decoding="async">
-                <img src="./img/13.png" style="position:absolute;left:659px;top:301px;width:301px;height:301px;object-fit:cover;border-radius:1000px;" loading="lazy" decoding="async">
+                <img src="./img/11.png"
+                    style="position:absolute;left:0;top:0;width:490px;height:620px;object-fit:cover;border-radius:32px;"
+                    loading="lazy" decoding="async">
+                <img src="./img/12.png"
+                    style="position:absolute;left:655px;top:0;width:305px;height:301px;object-fit:cover;border-radius:32px;"
+                    loading="lazy" decoding="async">
+                <img src="./img/13.png"
+                    style="position:absolute;left:659px;top:301px;width:301px;height:301px;object-fit:cover;border-radius:1000px;"
+                    loading="lazy" decoding="async">
             </div>
-            <p class="nm-below-caption">Animated gradient generator</p>
+            <div class="nm-floor-mobile">
+                <img src="./img/11.png" class="nm-mobile-img" style="aspect-ratio:335/424;border-radius:32px;"
+                    loading="lazy">
+            </div>
+            <p class="nm-below-caption">Animated gradient engine</p>
         </div>
 
         <!-- Floor 7 + caption -->
         <div class="nm-floor" style="margin-bottom:180px;">
             <div class="nm-floor-inner" data-height="579">
-                <img src="./img/14.png" style="position:absolute;left:0;top:0;width:960px;height:579px;object-fit:cover;border-radius:0;" loading="lazy" decoding="async">
+                <img src="./img/14.png"
+                    style="position:absolute;left:0;top:0;width:960px;height:579px;object-fit:cover;border-radius:0;"
+                    loading="lazy" decoding="async">
             </div>
-            <p class="nm-below-caption">Presentation for Tunnel Tech [art direction by K. Belyaev]</p>
+            <div class="nm-floor-mobile">
+                <img src="./img/14.png" class="nm-mobile-img" style="aspect-ratio:335/202;border-radius:0;"
+                    loading="lazy">
+            </div>
+            <p class="nm-below-caption">Tunnel Tech. Aerospace storytelling [art direction by K. Belyaev]</p>
         </div>
 
         <!-- Floor 8 (no caption) -->
         <div class="nm-floor" style="margin-bottom:100px;">
             <div class="nm-floor-inner" data-height="545">
-                <img src="./img/16.png" style="position:absolute;left:490px;top:0;width:470px;height:545px;object-fit:cover;border-radius:0;" loading="lazy" decoding="async">
-                <img src="./img/15.png" style="position:absolute;left:0;top:244px;width:305px;height:301px;object-fit:cover;border-radius:32px;" loading="lazy" decoding="async">
+                <img src="./img/16.png"
+                    style="position:absolute;left:490px;top:0;width:470px;height:545px;object-fit:cover;border-radius:0;"
+                    loading="lazy" decoding="async">
+                <img src="./img/15.png"
+                    style="position:absolute;left:0;top:244px;width:305px;height:301px;object-fit:cover;border-radius:32px;"
+                    loading="lazy" decoding="async">
+            </div>
+            <div class="nm-floor-mobile">
+                <img src="./img/15.png" class="nm-mobile-img" style="aspect-ratio:305/301;border-radius:32px;width:60%;"
+                    loading="lazy">
+                <img src="./img/16.png" class="nm-mobile-img"
+                    style="aspect-ratio:335/388;border-radius:0;margin-top:20px;" loading="lazy">
             </div>
         </div>
 
         <!-- ════════════════ SECTION 3 ════════════════ -->
         <div class="nm-section-header" style="padding-top:100px;">
-            <h1>Section 3. Design strategy for all</h1>
-            <p>Supported GoParrot's acquisition process and helped with design migration. Post-acquisition shaped the
-                long-term vision and designed the enterprise product in Square.</p>
+            <h1>➂ Personal work: Thinking out loud</h1>
+            <p>Not everything needs a client. I redesign products I use, explore interaction patterns that interest me,
+                and occasionally rebuild something just to understand why the original works — or doesn't. These aren't
+                portfolio pieces. They're how I stay curious.</p>
         </div>
 
         <!-- Floor 9 (no caption) -->
         <div class="nm-floor" style="margin-bottom:180px;">
             <div class="nm-floor-inner" data-height="520">
-                <img src="./img/17.png" style="position:absolute;left:0;top:0;width:756px;height:520px;object-fit:cover;border-radius:32px;" loading="lazy" decoding="async">
-                <img src="./img/18.png" style="position:absolute;left:756px;top:0;width:203px;height:318px;object-fit:cover;border-radius:1000px;" loading="lazy" decoding="async">
+                <img src="./img/17.png"
+                    style="position:absolute;left:0;top:0;width:756px;height:520px;object-fit:cover;border-radius:32px;"
+                    loading="lazy" decoding="async">
+                <img src="./img/18.png"
+                    style="position:absolute;left:756px;top:0;width:203px;height:318px;object-fit:cover;border-radius:1000px;"
+                    loading="lazy" decoding="async">
+            </div>
+            <div class="nm-floor-mobile">
+                <img src="./img/17.png" class="nm-mobile-img" style="aspect-ratio:756/520;border-radius:32px;"
+                    loading="lazy">
+                <img src="./img/18.png" class="nm-mobile-img"
+                    style="aspect-ratio:203/318;border-radius:1000px;width:54%;margin-left:auto;" loading="lazy">
             </div>
         </div>
 
         <!-- Floor 10 (no caption) -->
         <div class="nm-floor" style="margin-bottom:180px;">
             <div class="nm-floor-inner" data-height="301">
-                <img src="./img/19.png" style="position:absolute;left:0;top:0;width:301px;height:301px;object-fit:cover;border-radius:1000px;" loading="lazy" decoding="async">
-                <img src="./img/20.png" style="position:absolute;left:301px;top:0;width:329px;height:301px;object-fit:cover;border-radius:32px;" loading="lazy" decoding="async">
-                <img src="./img/21.png" style="position:absolute;left:630px;top:0;width:330px;height:301px;object-fit:cover;border-radius:32px;" loading="lazy" decoding="async">
+                <img src="./img/19.png"
+                    style="position:absolute;left:0;top:0;width:301px;height:301px;object-fit:cover;border-radius:1000px;"
+                    loading="lazy" decoding="async">
+                <img src="./img/20.png"
+                    style="position:absolute;left:301px;top:0;width:329px;height:301px;object-fit:cover;border-radius:32px;"
+                    loading="lazy" decoding="async">
+                <img src="./img/21.png"
+                    style="position:absolute;left:630px;top:0;width:330px;height:301px;object-fit:cover;border-radius:32px;"
+                    loading="lazy" decoding="async">
+            </div>
+            <div class="nm-floor-mobile">
+                <img src="./img/19.png" class="nm-mobile-img" style="aspect-ratio:1/1;border-radius:1000px;"
+                    loading="lazy">
+                <img src="./img/20.png" class="nm-mobile-img"
+                    style="aspect-ratio:329/301;border-radius:32px;" loading="lazy">
+                <img src="./img/21.png" class="nm-mobile-img"
+                    style="aspect-ratio:330/301;border-radius:32px;" loading="lazy">
             </div>
         </div>
 
         <!-- Floor 11 + caption — PH22 border-radius:0 -->
         <div class="nm-floor" style="margin-bottom:180px;">
             <div class="nm-floor-inner" data-height="545">
-                <img src="./img/22.png" style="position:absolute;left:0;top:0;width:960px;height:545px;object-fit:cover;border-radius:0;" loading="lazy" decoding="async">
+                <img src="./img/22.png"
+                    style="position:absolute;left:0;top:0;width:960px;height:545px;object-fit:cover;border-radius:0;"
+                    loading="lazy" decoding="async">
             </div>
-            <p class="nm-below-caption">VK monetization redesign concept</p>
+            <div class="nm-floor-mobile">
+                <img src="./img/22.png" class="nm-mobile-img" style="aspect-ratio:375/213;border-radius:0;"
+                    loading="lazy">
+            </div>
+            <p class="nm-below-caption">VK monetization concept. Redesigning creator economy</p>
         </div>
 
         <!-- Floor 12 + caption -->
         <div class="nm-floor" style="margin-bottom:180px;">
             <div class="nm-floor-inner" data-height="700">
-                <img src="./img/23.png" style="position:absolute;left:0;top:0;width:545px;height:700px;object-fit:cover;border-radius:0;" loading="lazy" decoding="async">
-                <img src="./img/24.png" style="position:absolute;left:659px;top:0;width:301px;height:301px;object-fit:cover;border-radius:1000px;" loading="lazy" decoding="async">
+                <img src="./img/23.png"
+                    style="position:absolute;left:0;top:0;width:545px;height:700px;object-fit:cover;border-radius:0;"
+                    loading="lazy" decoding="async">
+                <img src="./img/24.png"
+                    style="position:absolute;left:659px;top:0;width:301px;height:301px;object-fit:cover;border-radius:1000px;"
+                    loading="lazy" decoding="async">
             </div>
-            <p class="nm-below-caption">Movie streaming redesign concept</p>
+            <div class="nm-floor-mobile">
+                <img src="./img/23.png" class="nm-mobile-img" style="aspect-ratio:335/331;border-radius:0;"
+                    loading="lazy">
+                <img src="./img/24.png" class="nm-mobile-img"
+                    style="aspect-ratio:1/1;border-radius:1000px;width:54%;margin-left:auto;margin-top:20px;"
+                    loading="lazy">
+            </div>
+            <p class="nm-below-caption">Movie streaming concept. Beyond the generic interface</p>
         </div>
 
         <!-- Floor 13 + caption — PH25 border-radius:0 -->
         <div class="nm-floor" style="margin-bottom:180px;">
             <div class="nm-floor-inner" data-height="481">
-                <img src="./img/25.png" style="position:absolute;left:0;top:0;width:240px;height:237px;object-fit:cover;border-radius:0;" loading="lazy" decoding="async">
-                <img src="./img/26.png" style="position:absolute;left:240px;top:0;width:480px;height:481px;object-fit:cover;border-radius:32px;" loading="lazy" decoding="async">
-                <img src="./img/27.png" style="position:absolute;left:720px;top:0;width:240px;height:328px;object-fit:cover;border-radius:32px;" loading="lazy" decoding="async">
+                <img src="./img/25.png"
+                    style="position:absolute;left:0;top:0;width:240px;height:237px;object-fit:cover;border-radius:0;"
+                    loading="lazy" decoding="async">
+                <img src="./img/26.png"
+                    style="position:absolute;left:240px;top:0;width:480px;height:481px;object-fit:cover;border-radius:32px;"
+                    loading="lazy" decoding="async">
+                <img src="./img/27.png"
+                    style="position:absolute;left:720px;top:0;width:240px;height:328px;object-fit:cover;border-radius:32px;"
+                    loading="lazy" decoding="async">
             </div>
-            <p class="nm-below-caption" style="margin-left:25%;">ATM redesign concept</p>
+            <div class="nm-floor-mobile">
+                <img src="./img/25.png" class="nm-mobile-img" style="aspect-ratio:240/237;border-radius:0;width:53%;"
+                    loading="lazy">
+                <img src="./img/26.png" class="nm-mobile-img"
+                    style="aspect-ratio:480/481;border-radius:32px;" loading="lazy">
+                <img src="./img/27.png" class="nm-mobile-img"
+                    style="aspect-ratio:240/328;border-radius:32px;width:50%;margin-left:auto;" loading="lazy">
+            </div>
+            <p class="nm-below-caption" style="margin-left:25%;">ATM Redesign. Humanizing banking hardware</p>
         </div>
 
     </div><!-- /nm-content -->
@@ -292,19 +506,19 @@
 
     <script>
         // Wrap each floor image in a clipping div so hover zoom stays within its bounds
-        document.querySelectorAll('.nm-floor-inner img').forEach(function(img) {
+        document.querySelectorAll('.nm-floor-inner img').forEach(function (img) {
             var wrapper = document.createElement('div');
             wrapper.style.cssText = 'position:absolute;overflow:hidden;';
-            wrapper.style.left        = img.style.left;
-            wrapper.style.top         = img.style.top;
-            wrapper.style.width       = img.style.width;
-            wrapper.style.height      = img.style.height;
+            wrapper.style.left = img.style.left;
+            wrapper.style.top = img.style.top;
+            wrapper.style.width = img.style.width;
+            wrapper.style.height = img.style.height;
             wrapper.style.borderRadius = img.style.borderRadius;
-            img.style.position    = 'static';
-            img.style.left        = '';
-            img.style.top         = '';
-            img.style.width       = '100%';
-            img.style.height      = '100%';
+            img.style.position = 'static';
+            img.style.left = '';
+            img.style.top = '';
+            img.style.width = '100%';
+            img.style.height = '100%';
             img.style.borderRadius = '';
             img.parentNode.insertBefore(wrapper, img);
             wrapper.appendChild(img);
@@ -312,20 +526,20 @@
 
         function scaleFloors() {
             var bodyFontSize = parseFloat(getComputedStyle(document.body).fontSize);
-            document.querySelectorAll('.nm-floor').forEach(function(floor) {
+            document.querySelectorAll('.nm-floor').forEach(function (floor) {
                 var inner = floor.querySelector('.nm-floor-inner');
                 if (!inner) return;
                 var zoom = floor.clientWidth / 960;
                 inner.style.height = inner.dataset.height + 'px';
                 inner.style.zoom = zoom;
-                inner.querySelectorAll('.nm-caption').forEach(function(cap) {
+                inner.querySelectorAll('.nm-caption').forEach(function (cap) {
                     cap.style.fontSize = (bodyFontSize / zoom) + 'px';
                 });
-                inner.querySelectorAll('.nm-caption .nm-case-pill').forEach(function(pill) {
-                    pill.style.padding = (1/zoom) + 'px ' + (12/zoom) + 'px ' + (2/zoom) + 'px';
-                    pill.style.borderWidth = (1/zoom) + 'px';
-                    pill.style.borderRadius = (100/zoom) + 'px';
-                    pill.style.marginRight = (10/zoom) + 'px';
+                inner.querySelectorAll('.nm-caption .nm-case-pill').forEach(function (pill) {
+                    pill.style.padding = (1 / zoom) + 'px ' + (12 / zoom) + 'px ' + (2 / zoom) + 'px';
+                    pill.style.borderWidth = (1 / zoom) + 'px';
+                    pill.style.borderRadius = (100 / zoom) + 'px';
+                    pill.style.marginRight = (10 / zoom) + 'px';
                 });
             });
         }
@@ -408,5 +622,154 @@
 
     <script src="./transitions.js"></script>
 
+    <!-- ── Pill physics (Floor 5 / Conspectus) ── -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <script>
+    (function () {
+        'use strict';
+        const cv = document.getElementById('pill-physics');
+        if (!cv) return;
+        const { Engine, Bodies, Body, Composite } = Matter;
+
+        const W = 185, H = 331, CR = W / 2, SH = H - CR * 2;
+        const DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+        /* ── desktop canvas ── */
+        cv.width  = W * DPR;
+        cv.height = H * DPR;
+        const ctx = cv.getContext('2d');
+        ctx.scale(DPR, DPR);
+
+        /* ── mobile canvas ── */
+        const cvM = document.getElementById('pill-physics-mobile');
+        let ctxM = null;
+        if (cvM) {
+            cvM.width  = W * DPR;
+            cvM.height = H * DPR;
+            ctxM = cvM.getContext('2d');
+            ctxM.scale(DPR, DPR);
+        }
+
+        const SVG_FILES = [
+            './img/Group 54.svg', './img/Group 55.svg',
+            './img/Group 58.svg', './img/Group 59.svg',
+            './img/Group 60.svg', './img/Group 61.svg',
+            './img/Group 65.svg', './img/Group 66.svg',
+            './img/Group 67.svg', './img/Group 68.svg',
+            './img/Group 87.svg', './img/Group 88.svg',
+        ];
+        const IMG_R = 22.5, N = SVG_FILES.length;
+        const imgs = SVG_FILES.map(src => { const i = new Image(); i.src = src; return i; });
+
+        const engine = Engine.create({ gravity: { x: 0, y: 2.2 } });
+
+        const GAP = 3, WT = 20, SEGS = 32;
+        const innerR = CR - GAP, arcR = innerR + WT / 2;
+        const step = Math.PI / SEGS, sLen = 2 * arcR * Math.sin(step / 2) + 2;
+        const wOpt = { isStatic: true, friction: 0.05, restitution: 0.65 };
+
+        const walls = [
+            Bodies.rectangle(GAP - WT/2,      H/2, WT, SH + WT, wOpt),
+            Bodies.rectangle(W - GAP + WT/2,  H/2, WT, SH + WT, wOpt),
+        ];
+        for (let i = 0; i < SEGS; i++) {
+            const at = Math.PI + step * (i + 0.5);
+            walls.push(Bodies.rectangle(W/2 + arcR*Math.cos(at), CR + arcR*Math.sin(at),
+                sLen, WT, { ...wOpt, angle: at + Math.PI/2 }));
+            const ab = step * (i + 0.5);
+            walls.push(Bodies.rectangle(W/2 + arcR*Math.cos(ab), (H-CR) + arcR*Math.sin(ab),
+                sLen, WT, { ...wOpt, angle: ab + Math.PI/2 }));
+        }
+        Composite.add(engine.world, walls);
+
+        const bodies = Array.from({ length: N }, (_, i) => {
+            const col = i % 3, row = Math.floor(i / 3);
+            const x = W*0.18 + col*(W*0.32) + (Math.random()-0.5)*8;
+            const y = CR*0.5 + row*(IMG_R*2.8) + (Math.random()-0.5)*6;
+            const b = Bodies.circle(x, y, IMG_R, {
+                restitution: 0.55, friction: 0.04, frictionAir: 0.01, density: 0.003,
+            });
+            Body.setVelocity(b, { x: (Math.random()-0.5)*1.5, y: Math.random()*2 });
+            return b;
+        });
+        Composite.add(engine.world, bodies);
+
+        let mx = -9999, my = -9999;
+
+        /* ── desktop: mouse ── */
+        cv.addEventListener('mousemove', e => {
+            const r = cv.getBoundingClientRect();
+            mx = (e.clientX - r.left) * (W / r.width);
+            my = (e.clientY - r.top)  * (H / r.height);
+        });
+        cv.addEventListener('mouseleave', () => { mx = -9999; my = -9999; });
+
+        /* ── mobile: touch ── */
+        if (cvM) {
+            const touchPos = e => {
+                const r = cvM.getBoundingClientRect();
+                const t = e.touches[0] || e.changedTouches[0];
+                return {
+                    x: (t.clientX - r.left) * (W / r.width),
+                    y: (t.clientY - r.top)  * (H / r.height),
+                };
+            };
+            cvM.addEventListener('touchstart', e => {
+                e.preventDefault();
+                const p = touchPos(e); mx = p.x; my = p.y;
+            }, { passive: false });
+            cvM.addEventListener('touchmove', e => {
+                e.preventDefault();
+                const p = touchPos(e); mx = p.x; my = p.y;
+            }, { passive: false });
+            cvM.addEventListener('touchend', () => { mx = -9999; my = -9999; });
+        }
+
+        const REPEL_R = 80, REPEL_K = 0.32;
+        let lastT = performance.now();
+        (function tick(now) {
+            requestAnimationFrame(tick);
+            const dt = Math.min(now - lastT, 50); lastT = now;
+            bodies.forEach(b => {
+                const dx = b.position.x - mx, dy = b.position.y - my;
+                const d  = Math.hypot(dx, dy);
+                if (d < REPEL_R && d > 0.5) {
+                    const t = 1 - d / REPEL_R;
+                    const s = REPEL_K * t * t * t * (1 + 4 * t * t);
+                    Body.applyForce(b, b.position, { x: (dx/d)*s, y: (dy/d)*s });
+                }
+            });
+            Engine.update(engine, dt);
+            drawTo(ctx);
+            if (ctxM) drawTo(ctxM);
+        })(performance.now());
+
+        function drawTo(c) {
+            c.clearRect(0, 0, W, H);
+            c.save();
+            pillPath(c); c.fillStyle = '#ebebeb'; c.fill(); c.clip();
+            imgs.forEach((img, i) => {
+                if (!img.complete || !img.naturalWidth) return;
+                const b = bodies[i];
+                c.save();
+                c.translate(b.position.x, b.position.y);
+                c.rotate(b.angle);
+                c.drawImage(img, -IMG_R, -IMG_R, IMG_R*2, IMG_R*2);
+                c.restore();
+            });
+            c.restore();
+        }
+
+        function pillPath(c) {
+            c.beginPath();
+            c.arc(W/2, CR, CR, Math.PI, 0);
+            c.lineTo(W, H - CR);
+            c.arc(W/2, H-CR, CR, 0, Math.PI);
+            c.closePath();
+        }
+    })();
+    </script>
+
 </body>
+
 </html>

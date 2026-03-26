@@ -116,6 +116,28 @@
             display: block;
         }
 
+        /* Parallax container for final image */
+        .parallax-container {
+            height: calc(50vw - 10px);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .parallax-img {
+            width: 100%;
+            height: calc(100% + 960px);
+            object-fit: cover;
+            object-position: top;
+            transform: translateY(0);
+            will-change: transform;
+        }
+
+        @media (max-width: 768px) {
+            .parallax-container {
+                height: 80vw;
+            }
+        }
+
         /* Break out of page-content to match main page full-width images */
         .full-bleed {
             margin-left: calc(-146px - 8px);
@@ -385,7 +407,8 @@
 
         <!-- Image 1 -->
         <div class="full-bleed full-bleed-first">
-            <div class="blurred-img-wrap"><div class="blurred-img-overlay"><span>Screens exist. NDA says shh.<br>Coming soon.</span></div>
+            <div class="blurred-img-wrap">
+                <div class="blurred-img-overlay"><span>Screens exist. NDA says shh.<br>Coming soon.</span></div>
                 <img src="./img/5.png" loading="lazy" decoding="async">
             </div>
         </div>
@@ -410,7 +433,8 @@
 
         <!-- Image 2 -->
         <div class="full-bleed">
-            <div class="blurred-img-wrap"><div class="blurred-img-overlay"><span>Screens exist. NDA says shh.<br>Coming soon.</span></div>
+            <div class="blurred-img-wrap">
+                <div class="blurred-img-overlay"><span>Screens exist. NDA says shh.<br>Coming soon.</span></div>
                 <img src="./img/4.png" loading="lazy" decoding="async">
             </div>
         </div>
@@ -440,7 +464,8 @@
 
         <!-- Image 3 -->
         <div class="full-bleed">
-            <div class="blurred-img-wrap"><div class="blurred-img-overlay"><span>Screens exist. NDA says shh.<br>Coming soon.</span></div>
+            <div class="blurred-img-wrap">
+                <div class="blurred-img-overlay"><span>Screens exist. NDA says shh.<br>Coming soon.</span></div>
                 <img src="./img/5.png" loading="lazy" decoding="async">
             </div>
         </div>
@@ -466,23 +491,22 @@
         <div class="case-cols section-spacer">
             <div>
                 <h4 class="section-subheading">Impact</h4>
-                <p>➀ Adoption: 26% of target users onboarded within the first weeks — a high rate for enterprise
+                <p>➀ Adoption: &#10074;&#10074;% of target users onboarded within the first weeks — a high rate for
+                    enterprise
                     workflow changes.<br>
                     ➁ Sales Enablement: Successfully unblocked several "deal-breaker" enterprise accounts that
                     required native royalty management to sign.<br>
                     ➂ Efficiency: Replaced hours of manual spreadsheet work with a "set-and-forget" native
                     infrastructure.</p>
             </div>
-            <div>
-                <p class="pull-quote">26% of target users onboarded within the first weeks</p>
-            </div>
+
         </div>
 
-        <!-- Final image with marker effect -->
-        <div class="full-bleed" id="royalty-marker" style="position:relative;cursor:crosshair;">
-            <div class="blurred-img-wrap"><div class="blurred-img-overlay"><span>Screens exist. NDA says shh.<br>Coming soon.</span></div>
-                <img src="./img/5.png" id="royalty-marker-img" loading="lazy" decoding="async"
-                    style="filter:none;transform:none;">
+        <!-- Final image with parallax + marker effect -->
+        <div class="full-bleed">
+            <div class="parallax-container" id="royalty-parallax" style="cursor:crosshair;">
+                <img src="./img/Royalty Full.png" class="parallax-img" id="royalty-parallax-img" loading="lazy"
+                    decoding="async">
             </div>
         </div>
 
@@ -492,9 +516,27 @@
 
     <script>
         (function () {
+            var img = document.getElementById('royalty-parallax-img');
+            if (!img) return;
+            var range = 480;
+            function update() {
+                var container = img.closest('.parallax-container');
+                var rect = container.getBoundingClientRect();
+                var vh = window.innerHeight;
+                var progress = 1 - (rect.bottom / (vh + rect.height));
+                var clamped = Math.min(1, Math.max(0, progress));
+                img.style.transform = 'translateY(' + (clamped * -range) + 'px)';
+            }
+            window.addEventListener('scroll', update, { passive: true });
+            update();
+        })();
+    </script>
+
+    <script>
+        (function () {
             if (!window.matchMedia('(pointer: fine)').matches) return;
 
-            var container = document.getElementById('royalty-marker');
+            var container = document.getElementById('royalty-parallax');
             if (!container) return;
 
             var canvas = document.createElement('canvas');
@@ -507,7 +549,7 @@
             }
             window.addEventListener('resize', resizeCanvas);
 
-            var markerImg = document.getElementById('royalty-marker-img');
+            var markerImg = document.getElementById('royalty-parallax-img');
             if (markerImg && markerImg.complete && markerImg.naturalHeight > 0) {
                 resizeCanvas();
             } else if (markerImg) {
