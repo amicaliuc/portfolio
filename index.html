@@ -29,6 +29,33 @@
             max-width: 700px;
         }
 
+        /* ── Section anchor links ── */
+        .nav-links { display: flex; gap: 4px; }
+
+        /* Each link stacks hollow + filled glyph in the same cell */
+        .nav-links .nm-section-link {
+            display: inline-grid;
+            text-decoration: none !important;
+            font-size: clamp(52px, 7vw, 72px);
+            line-height: 1;
+            color: #0b0b0b;
+        }
+        .nav-links .nm-section-link .sl-hollow,
+        .nav-links .nm-section-link .sl-filled {
+            grid-area: 1 / 1;
+            transition: opacity 0.18s ease;
+        }
+        .nav-links .nm-section-link .sl-filled { opacity: 0; }
+
+        .nav-links .nm-section-link:hover .sl-hollow,
+        .nav-links .nm-section-link.is-active .sl-hollow { opacity: 0; }
+        .nav-links .nm-section-link:hover .sl-filled,
+        .nav-links .nm-section-link.is-active .sl-filled { opacity: 1; }
+
+        /* Smooth scroll + section offset = avatar top edge (24px) */
+        html { scroll-behavior: smooth; }
+        .nm-section-anchor { scroll-margin-top: 24px; }
+
         /* ── Floors — break out like full-bleed ── */
         .nm-floor {
             margin-left: calc(-146px - 8px);
@@ -181,9 +208,9 @@
         <img src="./img/anatolie.webp" class="sticky-image" width="263" height="208">
         <div class="top-right-content">
             <div class="nav-links">
-                <a href="#section1">Strategy</a>
-                <a href="#section2">GoParrot</a>
-                <a href="#section3">All</a>
+                <a href="#section1" class="nm-section-link"><span class="sl-hollow">➀</span><span class="sl-filled">➊</span></a>
+                <a href="#section2" class="nm-section-link"><span class="sl-hollow">➁</span><span class="sl-filled">➋</span></a>
+                <a href="#section3" class="nm-section-link"><span class="sl-hollow">➂</span><span class="sl-filled">➌</span></a>
             </div>
             <a href="mailto:ihoodstar@gmail.com?subject=Let's talk about design" class="primary-button">Let's talk</a>
         </div>
@@ -199,7 +226,7 @@
 
         <!-- ════════════════ SECTION 1 ════════════════ -->
         <div class="nm-section-header">
-            <h1>➀ Enterprise Systems: Scaling Post-Acquisition Vision</h1>
+            <h1 id="section1" class="nm-section-anchor">➀ Enterprise Systems: Scaling Post-Acquisition Vision</h1>
             <p>At Square I designed the enterprise product. From defining
                 a north star to rebuilding checkout that was losing &#10074;&#10074;% of
                 orders
@@ -283,7 +310,7 @@
 
         <!-- ════════════════ SECTION 2 ════════════════ -->
         <div class="nm-section-header" style="padding-top:100px;">
-            <h1>➁ Startups & 0-to-1: From Raw Idea to 3x MRR Growth</h1>
+            <h1 id="section2" class="nm-section-anchor">➁ Startups & 0-to-1: From Raw Idea to 3x MRR Growth</h1>
             <p>Early-stage work is a different discipline. There's no existing system to design within: you're figuring
                 out the product, the user, and the business model at the same time.</p>
             <p> I've helped startups turn ideas into
@@ -390,7 +417,7 @@
 
         <!-- ════════════════ SECTION 3 ════════════════ -->
         <div class="nm-section-header" style="padding-top:100px;">
-            <h1>➂ Personal work: Thinking out loud</h1>
+            <h1 id="section3" class="nm-section-anchor">➂ Personal work: Thinking out loud</h1>
             <p>Not everything needs a client. I redesign products I use, explore interaction patterns that interest me,
                 and occasionally rebuild something just to understand why the original works — or doesn't. These aren't
                 portfolio pieces. They're how I stay curious.</p>
@@ -617,6 +644,36 @@
             container.addEventListener('mousedown', function () { moved = false; });
             container.addEventListener('mouseup', function () {
                 if (!moved) colorIndex = (colorIndex + 1) % colors.length;
+            });
+        })();
+    </script>
+
+    <!-- ── Active nav link on scroll ── -->
+    <script>
+        (function () {
+            var links = {
+                section1: document.querySelector('a[href="#section1"]'),
+                section2: document.querySelector('a[href="#section2"]'),
+                section3: document.querySelector('a[href="#section3"]'),
+            };
+            var ids = Object.keys(links);
+
+            function setActive(activeId) {
+                ids.forEach(function (id) {
+                    if (links[id]) links[id].classList.toggle('is-active', id === activeId);
+                });
+            }
+
+            // rootMargin: element is "active" when its top is within the top 30% of viewport
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) setActive(entry.target.id);
+                });
+            }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+            ids.forEach(function (id) {
+                var el = document.getElementById(id);
+                if (el) observer.observe(el);
             });
         })();
     </script>
