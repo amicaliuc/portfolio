@@ -494,9 +494,10 @@ a:has(.project-info):hover,
 
 @font-face {
     font-family: 'Stratos';
-    src: url('/fonts/Stratos-Regular.woff2') format('woff2');
+    src: url('./fonts/Stratos-Regular.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -504,4 +505,5 @@ a:has(.project-info):hover,
     src: url('./fonts/EditorialNew-Variable.woff2') format('woff2');
     font-weight: 100 900;
     font-style: normal;
+    font-display: swap;
 }
