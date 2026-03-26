@@ -187,7 +187,7 @@
   /* ── unlock logic ───────────────────────────────────────────── */
   function tryUnlock() {
     var val = (document.getElementById('lock-pw').value || '').trim();
-    if (val === CORRECT_PW) {
+    if (val.toLowerCase() === CORRECT_PW) {
       localStorage.setItem(STORAGE_KEY, '1');
       releaseScrollLock();
       var overlay = document.getElementById('case-lock-overlay');
