@@ -27,40 +27,31 @@
       'position:fixed;inset:0;z-index:999;',
     '}',
 
-    /* progressive blur — 3 layers with mask gradients */
+    /* progressive blur — 3 layers, top set dynamically via JS */
     '.lock-b1,.lock-b2,.lock-b3{',
       'position:absolute;left:0;right:0;bottom:0;',
+      'will-change:transform;',
     '}',
+    /* blur ramps: each layer starts where the previous one reaches full opacity */
+    /* JS sets top via inline style; mask length = 100px so blur creeps in over 100px */
     '.lock-b1{',
-      'top:22%;',
-      'backdrop-filter:blur(3px);',
-      '-webkit-backdrop-filter:blur(3px);',
-      '-webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 55%);',
-      'mask-image:linear-gradient(to bottom,transparent 0%,black 55%);',
+      'backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);',
+      '-webkit-mask-image:linear-gradient(to bottom,transparent 0,black 100px);',
+      'mask-image:linear-gradient(to bottom,transparent 0,black 100px);',
     '}',
     '.lock-b2{',
-      'top:35%;',
-      'backdrop-filter:blur(7px);',
-      '-webkit-backdrop-filter:blur(7px);',
-      '-webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 50%);',
-      'mask-image:linear-gradient(to bottom,transparent 0%,black 50%);',
+      'backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);',
+      '-webkit-mask-image:linear-gradient(to bottom,transparent 0,black 100px);',
+      'mask-image:linear-gradient(to bottom,transparent 0,black 100px);',
     '}',
     '.lock-b3{',
-      'top:50%;',
-      'backdrop-filter:blur(11px);',
-      '-webkit-backdrop-filter:blur(11px);',
+      'backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);',
+      '-webkit-mask-image:linear-gradient(to bottom,transparent 0,black 100px);',
+      'mask-image:linear-gradient(to bottom,transparent 0,black 100px);',
     '}',
 
-    /* white gradient fade — covers whole overlay */
-    '.lock-fade{',
-      'position:absolute;inset:0;pointer-events:none;',
-      'background:linear-gradient(to bottom,',
-        'rgba(255,255,255,0) 0%,',
-        'rgba(255,255,255,0) 22%,',
-        'rgba(255,255,255,0.38) 45%,',
-        'rgba(255,255,255,0.95) 72%',
-      ');',
-    '}',
+    /* white gradient fade — start pixel set inline by JS */
+    '.lock-fade{position:absolute;inset:0;pointer-events:none;}',
 
     /* password form — fixed at bottom */
     '.lock-form-wrap{',
@@ -128,6 +119,36 @@
   ].join('');
   document.head.appendChild(css);
 
+  /* ── position blur layers at .case-meta top ────────────────── */
+  function positionBlur() {
+    var overlay = document.getElementById('case-lock-overlay');
+    if (!overlay) return;
+
+    // Find the first metadata block (Scope / Role / Year row)
+    var anchor = document.querySelector('.case-meta') ||
+                 document.querySelector('.page-content');
+    if (!anchor) return;
+
+    // metaY = px from top of viewport where metadata starts
+    var metaY = Math.round(anchor.getBoundingClientRect().top);
+
+    // Three blur layers staggered by 80px so blur ramps up progressively
+    // Each layer's mask goes transparent→full over 100px (CSS above)
+    overlay.querySelector('.lock-b1').style.top = metaY + 'px';
+    overlay.querySelector('.lock-b2').style.top = (metaY + 80) + 'px';
+    overlay.querySelector('.lock-b3').style.top = (metaY + 160) + 'px';
+
+    // White gradient: transparent until metaY, then fades to nearly-white
+    var vh = window.innerHeight;
+    overlay.querySelector('.lock-fade').style.background =
+      'linear-gradient(to bottom,' +
+      'rgba(255,255,255,0) 0px,' +
+      'rgba(255,255,255,0) ' + metaY + 'px,' +
+      'rgba(255,255,255,0.15) ' + (metaY + 80) + 'px,' +
+      'rgba(255,255,255,0.50) ' + (metaY + 200) + 'px,' +
+      'rgba(255,255,255,0.95) ' + Math.round(vh * 0.82) + 'px)';
+  }
+
   /* ── build overlay HTML ─────────────────────────────────────── */
   function buildOverlay() {
     var el = document.createElement('div');
@@ -153,10 +174,13 @@
       '</div>';
     document.body.appendChild(el);
 
+    positionBlur();
+    window.addEventListener('resize', positionBlur);
+
     document.getElementById('lock-btn').addEventListener('click', tryUnlock);
     document.getElementById('lock-pw').addEventListener('keydown', function (e) {
       if (e.key === 'Enter') tryUnlock();
-      e.stopPropagation(); // don't trigger scroll-key handler
+      e.stopPropagation();
     });
   }
 
