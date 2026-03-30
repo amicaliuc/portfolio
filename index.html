@@ -133,7 +133,8 @@
             display: block;
         }
 
-        a .nm-floor-inner img:hover {
+        a .nm-floor-inner img:hover,
+        .nm-floor-inner a img:hover {
             transform: scale(1.02);
         }
 
@@ -765,6 +766,15 @@
                 }
 
                 imgEl.addEventListener('load', update);
+                // Handle image already in cache (load event won't fire again)
+                if (imgEl.complete && imgEl.naturalWidth) update();
+                // Handle lazy loading: trigger update when container nears viewport
+                if ('IntersectionObserver' in window) {
+                    var io = new IntersectionObserver(function (entries) {
+                        if (entries[0].isIntersecting) update();
+                    }, { rootMargin: '400px' });
+                    io.observe(containerEl);
+                }
                 window.addEventListener('scroll', update, { passive: true });
                 window.addEventListener('resize', update);
                 update();
