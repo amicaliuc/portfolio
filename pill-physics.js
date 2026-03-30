@@ -148,6 +148,23 @@
             }
 
             Engine.update(engine, dt);
+
+            // Cap velocity to prevent tunnelling through walls on fast touch
+            var MAX_V = 14;
+            for (var j2 = 0; j2 < bodies.length; j2++) {
+                var b2 = bodies[j2];
+                var spd = Math.hypot(b2.velocity.x, b2.velocity.y);
+                if (spd > MAX_V) {
+                    Body.setVelocity(b2, { x: b2.velocity.x / spd * MAX_V, y: b2.velocity.y / spd * MAX_V });
+                }
+                // Rescue bodies that escaped the pill bounds
+                if (b2.position.x < -IMG_R || b2.position.x > W + IMG_R ||
+                    b2.position.y < -IMG_R || b2.position.y > H + IMG_R) {
+                    Body.setPosition(b2, { x: W / 2, y: H * 0.35 });
+                    Body.setVelocity(b2, { x: (Math.random() - 0.5) * 2, y: 1 });
+                }
+            }
+
             drawTo(ctx);
             if (ctxM) drawTo(ctxM);
 
