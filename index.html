@@ -233,7 +233,7 @@
 
     <!-- ── Top bar ── -->
     <div class="top-bar">
-        <img src="./img/anatolie.webp" class="sticky-image" width="263" height="208">
+        <img src="./img/anatolie.webp" class="sticky-image" width="263" height="208" fetchpriority="high">
         <div class="top-right-content">
             <div class="nav-links">
                 <a href="#section1" class="nm-section-link"><span class="sl-hollow">➀</span><span class="sl-filled">➊</span></a>
@@ -739,9 +739,35 @@
 
     <script src="./transitions.js" defer></script>
 
-    <!-- ── Pill physics — both deferred so they execute in order after DOM ── -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js" defer></script>
-    <script src="./pill-physics.js" defer></script>
+    <!-- ── Pill physics — loaded only when canvas enters viewport ── -->
+    <script>
+        (function () {
+            // Observe both canvases: desktop one is hidden on mobile and vice versa
+            var triggers = [
+                document.getElementById('pill-physics'),
+                document.getElementById('pill-physics-mobile')
+            ].filter(Boolean);
+            if (!triggers.length) return;
+            var loaded = false;
+            function loadPhysics() {
+                if (loaded) return;
+                loaded = true;
+                io.disconnect();
+                var s = document.createElement('script');
+                s.src = 'https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js';
+                s.onload = function () {
+                    var s2 = document.createElement('script');
+                    s2.src = './pill-physics.js';
+                    document.head.appendChild(s2);
+                };
+                document.head.appendChild(s);
+            }
+            var io = new IntersectionObserver(function (entries) {
+                if (entries.some(function (e) { return e.isIntersecting; })) loadPhysics();
+            }, { rootMargin: '500px' });
+            triggers.forEach(function (t) { io.observe(t); });
+        })();
+    </script>
 
     <!-- ── Parallax scroll for picture 23 ── -->
     <script>
