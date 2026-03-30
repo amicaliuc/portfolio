@@ -202,6 +202,28 @@
                 margin-left: 0 !important;
             }
         }
+
+        .cta-buttons {
+            display: flex;
+            gap: 8px;
+            padding: 24px 0 48px;
+        }
+        .cta-btn {
+            flex: 1;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0b0b0b;
+            color: #fff;
+            border-radius: 100px;
+            font-family: 'Stratos', 'Helvetica Neue', Arial, sans-serif;
+            font-size: clamp(28px, 4vw, 36px);
+            font-weight: 500;
+            text-decoration: none;
+            transition: background 0.2s ease;
+        }
+        .cta-btn:hover { background: #FF5500; }
     </style>
 </head>
 
@@ -541,6 +563,12 @@
             <source srcset="./img/Footer.webp" type="image/webp">
             <img src="./img/Footer.png" loading="lazy">
         </picture>
+    </div>
+
+    <div class="cta-buttons">
+        <a href="https://www.linkedin.com/in/anatolie-micaliuc/" target="_blank" rel="noopener" class="cta-btn">LinkedIn</a>
+        <a href="./CV.pdf" target="_blank" rel="noopener" class="cta-btn">CV</a>
+        <a href="mailto:ihoodstar@gmail.com?subject=Let's%20talk%20about%20design" class="cta-btn">Send a message</a>
     </div>
 
     <script>
