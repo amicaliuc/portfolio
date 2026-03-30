@@ -540,7 +540,7 @@
                     loading="lazy" decoding="async">
             </div>
             <div class="nm-floor-mobile">
-                <div class="img23-parallax-mobile" style="display:block;width:100%;aspect-ratio:335/331;overflow:hidden;position:relative;">
+                <div class="img23-parallax-mobile" style="display:block;width:100%;aspect-ratio:335/414;overflow:hidden;position:relative;">
                     <img src="./img/23.webp"
                         style="position:absolute;top:0;left:0;width:100%;height:auto;will-change:transform;"
                         loading="lazy" decoding="async">
@@ -762,7 +762,9 @@
                     var startAt = 0.25;
                     var raw = 1 - (rect.bottom / (vh + rect.height));
                     var clamped = Math.min(1, Math.max(0, (raw - startAt) / (1 - startAt)));
-                    imgEl.style.transform = 'translateY(' + (clamped * -range) + 'px)';
+                    // Ease-in: slow start, accelerates into scroll
+                    var eased = clamped * clamped;
+                    imgEl.style.transform = 'translateY(' + (eased * -range) + 'px)';
                 }
 
                 imgEl.addEventListener('load', update);
