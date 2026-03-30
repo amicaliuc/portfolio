@@ -433,12 +433,13 @@
                     style="position:absolute;left:490px;top:0;width:470px;height:545px;object-fit:cover;border-radius:0;"
                     loading="lazy" decoding="async">
                 <a href="https://www.linkedin.com/in/anatolie-micaliuc/" target="_blank" rel="noopener"
-                   style="position:absolute;left:0;top:244px;width:305px;height:301px;display:block;border-radius:32px;overflow:hidden;background:#ebebeb;text-decoration:none;transition:transform 0.4s ease;"
+                   style="position:absolute;left:0;top:244px;width:305px;height:301px;display:block;text-decoration:none;transition:transform 0.4s ease;"
                    onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform=''">
-                    <img src="./img/pencil.webp"
-                        style="position:absolute;top:38px;left:20px;width:110px;transform:rotate(20deg);transform-origin:center;"
+                    <div style="position:absolute;inset:0;background:#ebebeb;border-radius:32px;"></div>
+                    <img src="./img/pencil.webp" class="no-zoom-wrap"
+                        style="position:absolute;top:38px;left:20px;width:110px;transform:rotate(20deg);transform-origin:center;z-index:1;"
                         loading="lazy" decoding="async">
-                    <div style="position:absolute;bottom:22px;left:20px;right:20px;">
+                    <div style="position:absolute;bottom:22px;left:20px;right:20px;z-index:1;">
                         <p style="margin:0;font-family:'Stratos','Helvetica Neue',Arial,sans-serif;font-size:18px;line-height:1.4;font-weight:400;color:#0b0b0b;"><strong>Want to find more about my work?</strong> Drop me a message</p>
                     </div>
                 </a>
@@ -582,7 +583,7 @@
 
     <script>
         // Wrap each floor image in a clipping div so hover zoom stays within its bounds
-        document.querySelectorAll('.nm-floor-inner img').forEach(function (img) {
+        document.querySelectorAll('.nm-floor-inner img:not(.no-zoom-wrap)').forEach(function (img) {
             var wrapper = document.createElement('div');
             wrapper.style.cssText = 'position:absolute;overflow:hidden;';
             wrapper.style.left = img.style.left;
