@@ -214,16 +214,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #0b0b0b;
-            color: #fff;
+            background: transparent;
+            color: #0b0b0b;
+            border: 1px solid #0b0b0b;
             border-radius: 100px;
             font-family: 'Stratos', 'Helvetica Neue', Arial, sans-serif;
             font-size: clamp(28px, 4vw, 36px);
             font-weight: 500;
             text-decoration: none;
-            transition: background 0.2s ease;
+            transition: background 0.2s ease, color 0.2s ease;
         }
-        .cta-btn:hover { background: #FF5500; }
+        .cta-btn:hover { background: #FF5500; color: #fff; border-color: #FF5500; }
     </style>
 </head>
 
