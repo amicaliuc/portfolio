@@ -754,8 +754,10 @@
 
                     var rect = containerEl.getBoundingClientRect();
                     var vh = window.innerHeight;
-                    var progress = 1 - (rect.bottom / (vh + rect.height));
-                    var clamped = Math.min(1, Math.max(0, progress));
+                    // Delay scroll start by 25% so user sees the top of the image first
+                    var startAt = 0.25;
+                    var raw = 1 - (rect.bottom / (vh + rect.height));
+                    var clamped = Math.min(1, Math.max(0, (raw - startAt) / (1 - startAt)));
                     imgEl.style.transform = 'translateY(' + (clamped * -range) + 'px)';
                 }
 
