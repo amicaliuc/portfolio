@@ -346,8 +346,27 @@
             will-change: transform;
         }
 
+        .checkout-birdeye-parallax {
+            height: calc(50vw - 10px);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .checkout-birdeye-img {
+            width: 100%;
+            height: calc(100% + 600px);
+            object-fit: cover;
+            object-position: top;
+            transform: translateY(0);
+            will-change: transform;
+        }
+
         @media (max-width: 768px) {
             .checkout-hero-parallax {
+                height: 120vw;
+            }
+
+            .checkout-birdeye-parallax {
                 height: 120vw;
             }
         }
@@ -495,7 +514,9 @@
 
         <!-- Checkout Birdeye -->
         <div class="full-bleed" style="margin-top:20px;">
-            <img src="./img/Checkout Birdeye.webp" alt="Checkout bird's-eye overview" style="width:100%;display:block;" loading="lazy" decoding="async">
+            <div class="checkout-birdeye-parallax">
+                <img src="./img/Checkout Birdeye.webp" alt="Checkout bird's-eye overview" class="checkout-birdeye-img" loading="lazy" decoding="async">
+            </div>
             <p style="margin-top:15px;font-size:inherit;color:rgba(0,0,0,0.5);">To make the transition smoother, we phased the rollout in two stages: first reducing checkout from 7 to 4 steps, then from 4 to 1.</p>
         </div>
 
@@ -612,6 +633,28 @@
                 var raw = window.scrollY / container.offsetHeight;
                 var clamped = Math.min(1, Math.max(0, raw));
                 // Quadratic ease-in: slow at the start, accelerates into scroll
+                var eased = clamped * clamped;
+                img.style.transform = 'translateY(' + (eased * -600) + 'px)';
+            }
+
+            window.addEventListener('scroll', update, { passive: true });
+            window.addEventListener('resize', update);
+            update();
+        })();
+    </script>
+
+    <script>
+        (function () {
+            var img = document.querySelector('.checkout-birdeye-img');
+            if (!img) return;
+
+            var container = img.closest('.checkout-birdeye-parallax');
+
+            function update() {
+                var rect = container.getBoundingClientRect();
+                var vh = window.innerHeight;
+                var raw = 1 - (rect.bottom / (vh + rect.height));
+                var clamped = Math.min(1, Math.max(0, raw));
                 var eased = clamped * clamped;
                 img.style.transform = 'translateY(' + (eased * -600) + 'px)';
             }
