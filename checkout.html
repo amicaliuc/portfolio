@@ -330,6 +330,28 @@
             }
         }
 
+        /* Parallax container for Checkout Hero */
+        .checkout-hero-parallax {
+            height: calc(50vw - 10px);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .checkout-hero-img {
+            width: 100%;
+            height: calc(100% + 600px);
+            object-fit: cover;
+            object-position: top;
+            transform: translateY(0);
+            will-change: transform;
+        }
+
+        @media (max-width: 768px) {
+            .checkout-hero-parallax {
+                height: 120vw;
+            }
+        }
+
         /* Enforce blurred img overlay specifically in html to bypass live css cache */
         .blurred-img-overlay {
             position: absolute;
@@ -402,11 +424,10 @@
 
         </div>
 
-        <!-- Image -->
+        <!-- Hero Image (parallax) -->
         <div class="full-bleed full-bleed-first">
-            <div class="blurred-img-wrap">
-                <div class="blurred-img-overlay"><span>Screens exist. NDA says shh.<br>Coming soon.</span></div>
-                <img src="./img/3.webp" loading="lazy" decoding="async">
+            <div class="checkout-hero-parallax">
+                <img src="./img/Checkout Hero.webp" alt="Checkout redesign" class="checkout-hero-img" loading="eager" decoding="async" fetchpriority="high">
             </div>
         </div>
 
@@ -570,6 +591,26 @@
             container.addEventListener('mouseup', function () {
                 if (!moved) colorIndex = (colorIndex + 1) % colors.length;
             });
+        })();
+    </script>
+
+    <script>
+        (function () {
+            var img = document.querySelector('.checkout-hero-img');
+            if (!img) return;
+
+            function update() {
+                var container = img.closest('.checkout-hero-parallax');
+                var rect = container.getBoundingClientRect();
+                var vh = window.innerHeight;
+                var progress = 1 - (rect.bottom / (vh + rect.height));
+                var clamped = Math.min(1, Math.max(0, progress));
+                img.style.transform = 'translateY(' + (clamped * -600) + 'px)';
+            }
+
+            window.addEventListener('scroll', update, { passive: true });
+            window.addEventListener('resize', update);
+            update();
         })();
     </script>
 
