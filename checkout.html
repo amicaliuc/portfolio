@@ -599,14 +599,17 @@
             var img = document.querySelector('.checkout-hero-img');
             if (!img) return;
 
+            var container = img.closest('.checkout-hero-parallax');
+
             function update() {
-                var container = img.closest('.checkout-hero-parallax');
-                var rect = container.getBoundingClientRect();
-                // progress = 0 when container top is at viewport top (page load),
-                // progress = 1 when container has fully scrolled past viewport top
-                var progress = -rect.top / rect.height;
-                var clamped = Math.min(1, Math.max(0, progress));
-                img.style.transform = 'translateY(' + (clamped * -600) + 'px)';
+                // progress starts at 0 on page load and grows with scroll —
+                // normalised against container height so the full 600px travel
+                // is spread over one container-height worth of scroll
+                var raw = window.scrollY / container.offsetHeight;
+                var clamped = Math.min(1, Math.max(0, raw));
+                // Quadratic ease-in: slow at the start, accelerates into scroll
+                var eased = clamped * clamped;
+                img.style.transform = 'translateY(' + (eased * -600) + 'px)';
             }
 
             window.addEventListener('scroll', update, { passive: true });
