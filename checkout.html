@@ -602,8 +602,9 @@
             function update() {
                 var container = img.closest('.checkout-hero-parallax');
                 var rect = container.getBoundingClientRect();
-                var vh = window.innerHeight;
-                var progress = 1 - (rect.bottom / (vh + rect.height));
+                // progress = 0 when container top is at viewport top (page load),
+                // progress = 1 when container has fully scrolled past viewport top
+                var progress = -rect.top / rect.height;
                 var clamped = Math.min(1, Math.max(0, progress));
                 img.style.transform = 'translateY(' + (clamped * -600) + 'px)';
             }
