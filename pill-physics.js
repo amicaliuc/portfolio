@@ -95,7 +95,7 @@
             var x = W * 0.18 + col * (W * 0.32) + (Math.random() - 0.5) * 8;
             var y = CR * 0.5  + row * (IMG_R * 2.8) + (Math.random() - 0.5) * 6;
             return Bodies.circle(x, y, IMG_R, {
-                restitution: 0.55, friction: 0.04, frictionAir: 0.01, density: 0.003,
+                restitution: 0.45, friction: 0.05, frictionAir: 0.035, density: 0.003,
             });
         });
         Composite.add(engine.world, bodies);
@@ -113,10 +113,10 @@
         var stopTimer = null;
         var lastT    = performance.now();
         var mx = -9999, my = -9999;
-        var REPEL_R = 80, REPEL_K = 0.32, MAX_V = 14;
+        var REPEL_R = 75, REPEL_K = 0.06, MAX_V = 8;
 
         function tick(now) {
-            var dt = Math.min(now - lastT, 50);
+            // Fixed timestep — prevents force/velocity spikes on slow frames
             lastT = now;
 
             for (var j = 0; j < bodies.length; j++) {
@@ -126,12 +126,12 @@
                 var d  = Math.hypot(dx, dy);
                 if (d < REPEL_R && d > 0.5) {
                     var t = 1 - d / REPEL_R;
-                    var s = REPEL_K * t * t * t * (1 + 4 * t * t);
+                    var s = REPEL_K * t * t;
                     Body.applyForce(b, b.position, { x: (dx / d) * s, y: (dy / d) * s });
                 }
             }
 
-            Engine.update(engine, dt);
+            Engine.update(engine, 16);
 
             var j2, b2, spd;
             for (j2 = 0; j2 < bodies.length; j2++) {
