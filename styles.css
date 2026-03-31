@@ -159,9 +159,11 @@ li {
     transition: background-color 0.3s ease;
 }
 
-.primary-button:hover {
-    color: #ffffff;
-    background-color: #FF5100;
+@media (hover: hover) {
+    .primary-button:hover {
+        color: #ffffff;
+        background-color: #FF5100;
+    }
 }
 
 

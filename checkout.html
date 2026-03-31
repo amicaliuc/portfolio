@@ -628,12 +628,12 @@
             var container = img.closest('.checkout-hero-parallax');
 
             function update() {
-                // progress starts at 0 on page load and grows with scroll —
-                // normalised against container height so the full 600px travel
-                // is spread over one container-height worth of scroll
                 var raw = window.scrollY / container.offsetHeight;
-                var clamped = Math.min(1, Math.max(0, raw));
-                // Quadratic ease-in: slow at the start, accelerates into scroll
+                // On mobile (coarse pointer) delay the start by 25% so the
+                // image holds at the top a bit longer before scrolling
+                var isMobile = window.matchMedia('(pointer: coarse)').matches;
+                var startAt = isMobile ? 0.25 : 0;
+                var clamped = Math.min(1, Math.max(0, (raw - startAt) / (1 - startAt)));
                 var eased = clamped * clamped;
                 img.style.transform = 'translateY(' + (eased * -600) + 'px)';
             }
