@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preload" href="./fonts/EditorialNew-Variable.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="./fonts/Stratos-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="./img/23.webp" as="image" media="(max-width: 767px)">
 
     <style>
         body {
@@ -30,8 +31,16 @@
         }
 
         /* ── Section anchor links ── */
-        .nav-links { display: flex; gap: 4px; }
-        @media screen and (max-width: 768px) { .nav-links { display: none; } }
+        .nav-links {
+            display: flex;
+            gap: 4px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+        }
 
         /* Each link stacks hollow + filled glyph in the same cell */
         .nav-links .nm-section-link {
@@ -42,23 +51,40 @@
             color: #0b0b0b;
             font-variant-emoji: text;
         }
+
         .nav-links .nm-section-link:hover,
-        .nav-links .nm-section-link.is-active { color: #0b0b0b; }
+        .nav-links .nm-section-link.is-active {
+            color: #0b0b0b;
+        }
+
         .nav-links .nm-section-link .sl-hollow,
         .nav-links .nm-section-link .sl-filled {
             grid-area: 1 / 1;
             transition: opacity 0.18s ease;
         }
-        .nav-links .nm-section-link .sl-filled { opacity: 0; }
+
+        .nav-links .nm-section-link .sl-filled {
+            opacity: 0;
+        }
 
         .nav-links .nm-section-link:hover .sl-hollow,
-        .nav-links .nm-section-link.is-active .sl-hollow { opacity: 0; }
+        .nav-links .nm-section-link.is-active .sl-hollow {
+            opacity: 0;
+        }
+
         .nav-links .nm-section-link:hover .sl-filled,
-        .nav-links .nm-section-link.is-active .sl-filled { opacity: 1; }
+        .nav-links .nm-section-link.is-active .sl-filled {
+            opacity: 1;
+        }
 
         /* Smooth scroll + section offset = avatar top edge (24px) */
-        html { scroll-behavior: smooth; }
-        .nm-section-anchor { scroll-margin-top: 24px; }
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .nm-section-anchor {
+            scroll-margin-top: 24px;
+        }
 
         /* ── Floors — break out like full-bleed ── */
         .nm-floor {
@@ -209,6 +235,7 @@
             gap: 8px;
             padding: 24px 0 48px;
         }
+
         .cta-btn {
             flex: 1;
             height: 200px;
@@ -225,7 +252,12 @@
             text-decoration: none;
             transition: background 0.2s ease, color 0.2s ease;
         }
-        .cta-btn:hover { background: #0b0b0b; color: #fff; border-color: #0b0b0b; }
+
+        .cta-btn:hover {
+            background: #0b0b0b;
+            color: #fff;
+            border-color: #0b0b0b;
+        }
     </style>
 </head>
 
@@ -236,9 +268,12 @@
         <img src="./img/anatolie.webp" class="sticky-image" width="263" height="208" fetchpriority="high">
         <div class="top-right-content">
             <div class="nav-links">
-                <a href="#section1" class="nm-section-link"><span class="sl-hollow">➀</span><span class="sl-filled">➊</span></a>
-                <a href="#section2" class="nm-section-link"><span class="sl-hollow">➁</span><span class="sl-filled">➋</span></a>
-                <a href="#section3" class="nm-section-link"><span class="sl-hollow">➂</span><span class="sl-filled">➌</span></a>
+                <a href="#section1" class="nm-section-link"><span class="sl-hollow">➀</span><span
+                        class="sl-filled">➊</span></a>
+                <a href="#section2" class="nm-section-link"><span class="sl-hollow">➁</span><span
+                        class="sl-filled">➋</span></a>
+                <a href="#section3" class="nm-section-link"><span class="sl-hollow">➂</span><span
+                        class="sl-filled">➌</span></a>
             </div>
             <a href="mailto:ihoodstar@gmail.com?subject=Let's talk about design" class="primary-button">Let's talk</a>
         </div>
@@ -255,11 +290,10 @@
         <!-- ════════════════ SECTION 1 ════════════════ -->
         <div class="nm-section-header">
             <h1 id="section1" class="nm-section-anchor">➀ Enterprise Systems: Scaling Post-Acquisition Vision</h1>
-            <p>At Square I designed the enterprise product. From defining
-                a north star to rebuilding checkout that was losing &#10074;&#10074;% of
-                orders
-                to royalty
-                infrastructure that closed deals we couldn't before. Dozens of shipped features, four teams, one
+            <p>After Square acquired GoParrot, I led design for the enterprise product. Since then: a
+                north star vision, menu management, royalty and
+                reporting tools that addressed top franchise requests, and a full design system migration. Dozens of
+                shipped features, four teams, one
                 platform.</p>
         </div>
 
@@ -338,12 +372,13 @@
 
         <!-- ════════════════ SECTION 2 ════════════════ -->
         <div class="nm-section-header" style="padding-top:100px;">
-            <h1 id="section2" class="nm-section-anchor">➁ Startups & 0-to-1: From Raw Idea to 3x MRR Growth</h1>
-            <p>Early-stage work is a different discipline. There's no existing system to design within: you're figuring
+            <h1 id="section2" class="nm-section-anchor">➁ Startups & 0-to-1: From Raw Idea to 4x MRR Growth</h1>
+            <p>Early-stage work is a different. There's no existing system to design within: you're figuring
                 out the product, the user, and the business model at the same time.</p>
             <p> I've helped startups turn ideas into
-                something real: first interfaces, design systems built to last, MVPs that were honest about what they
-                were testing. GoParrot started this way before becoming a $&#10074;&#10074;M exit.</p>
+                something real: first interfaces, design systems built to last, MVPs, marketing creatives, and more.
+                GoParrot started this way before showing 4x MRR growth and becoming a $&#10074;&#10074;M
+                exit.</p>
         </div>
 
         <!-- Floor 4 + two captions -->
@@ -395,7 +430,7 @@
         <div class="nm-floor" style="margin-bottom:180px;">
             <div class="nm-floor-inner" data-height="620">
                 <a href="https://gradient.amicaliuc.com/" target="_blank" rel="noopener"
-                   style="position:absolute;left:0;top:0;width:490px;height:620px;display:block;text-decoration:none;">
+                    style="position:absolute;left:0;top:0;width:490px;height:620px;display:block;text-decoration:none;">
                     <img src="./img/11.webp"
                         style="position:absolute;left:0;top:0;width:490px;height:620px;object-fit:cover;border-radius:32px;"
                         loading="lazy" decoding="async">
@@ -408,12 +443,15 @@
                     loading="lazy" decoding="async">
             </div>
             <div class="nm-floor-mobile">
-                <a href="https://gradient.amicaliuc.com/" target="_blank" rel="noopener" style="display:block;text-decoration:none;">
+                <a href="https://gradient.amicaliuc.com/" target="_blank" rel="noopener"
+                    style="display:block;text-decoration:none;">
                     <img src="./img/11.webp" class="nm-mobile-img" style="aspect-ratio:335/424;border-radius:32px;"
                         loading="lazy">
                 </a>
             </div>
-            <p class="nm-below-caption"><a href="https://gradient.amicaliuc.com/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(0,0,0,0.15);text-decoration-thickness:1px;text-underline-offset:4px;">Animated gradient engine</a></p>
+            <p class="nm-below-caption"><a href="https://gradient.amicaliuc.com/" target="_blank" rel="noopener"
+                    style="color:inherit;text-decoration:underline;text-decoration-color:rgba(0,0,0,0.15);text-decoration-thickness:1px;text-underline-offset:4px;">Animated
+                    gradient engine</a></p>
         </div>
 
         <!-- Floor 7 + caption -->
@@ -437,26 +475,32 @@
                     style="position:absolute;left:490px;top:0;width:470px;height:545px;object-fit:cover;border-radius:0;"
                     loading="lazy" decoding="async">
                 <a href="https://www.linkedin.com/in/anatolie-micaliuc/" target="_blank" rel="noopener"
-                   style="position:absolute;left:0;top:244px;width:305px;height:301px;display:block;text-decoration:none;transition:transform 0.4s ease;"
-                   onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform=''">
+                    style="position:absolute;left:0;top:244px;width:305px;height:301px;display:block;text-decoration:none;transition:transform 0.4s ease;"
+                    onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform=''">
                     <div style="position:absolute;inset:0;background:#ebebeb;border-radius:32px;"></div>
                     <img src="./img/pencil.webp" class="no-zoom-wrap"
                         style="position:absolute;top:38px;left:20px;width:110px;transform:rotate(20deg);transform-origin:center;z-index:1;"
                         loading="lazy" decoding="async">
                     <div style="position:absolute;bottom:22px;left:20px;right:20px;z-index:1;">
-                        <p style="margin:0;font-family:'Stratos','Helvetica Neue',Arial,sans-serif;font-size:18px;line-height:1.4;font-weight:400;color:#0b0b0b;"><strong>Want to find more about my work?</strong> Drop me a message</p>
+                        <p
+                            style="margin:0;font-family:'Stratos','Helvetica Neue',Arial,sans-serif;font-size:18px;line-height:1.4;font-weight:400;color:#0b0b0b;">
+                            <strong>Want to find more about my work?</strong> Drop me a message
+                        </p>
                     </div>
                 </a>
             </div>
             <div class="nm-floor-mobile">
                 <a href="https://www.linkedin.com/in/anatolie-micaliuc/" target="_blank" rel="noopener"
-                   style="display:block;width:60%;aspect-ratio:305/301;text-decoration:none;position:relative;container-type:inline-size;">
+                    style="display:block;width:60%;aspect-ratio:305/301;text-decoration:none;position:relative;container-type:inline-size;">
                     <div style="position:absolute;inset:0;background:#ebebeb;border-radius:32px;"></div>
                     <img src="./img/pencil.webp"
                         style="position:absolute;top:13%;left:8%;width:44%;transform:rotate(20deg);transform-origin:center;z-index:1;"
                         loading="lazy" decoding="async">
                     <div style="position:absolute;bottom:6%;left:6%;right:6%;z-index:1;">
-                        <p style="margin:0;font-family:'Stratos','Helvetica Neue',Arial,sans-serif;font-size:5.5cqi;line-height:1.4;font-weight:400;color:#0b0b0b;"><strong>Want to find more about my work?</strong> Drop me a message</p>
+                        <p
+                            style="margin:0;font-family:'Stratos','Helvetica Neue',Arial,sans-serif;font-size:5.5cqi;line-height:1.4;font-weight:400;color:#0b0b0b;">
+                            <strong>Want to find more about my work?</strong> Drop me a message
+                        </p>
                     </div>
                 </a>
                 <img src="./img/16.webp" class="nm-mobile-img"
@@ -530,7 +574,8 @@
         <!-- Floor 12 + caption -->
         <div class="nm-floor" style="margin-bottom:180px;">
             <div class="nm-floor-inner" data-height="700">
-                <div class="img23-parallax" style="position:absolute;left:0;top:0;width:545px;height:700px;overflow:hidden;">
+                <div class="img23-parallax"
+                    style="position:absolute;left:0;top:0;width:545px;height:700px;overflow:hidden;">
                     <img src="./img/23.webp" class="no-zoom-wrap"
                         style="position:absolute;top:0;left:0;width:100%;height:auto;will-change:transform;transition:none;"
                         loading="lazy" decoding="async">
@@ -540,7 +585,8 @@
                     loading="lazy" decoding="async">
             </div>
             <div class="nm-floor-mobile">
-                <div class="img23-parallax-mobile" style="display:block;width:100%;aspect-ratio:335/414;overflow:hidden;position:relative;">
+                <div class="img23-parallax-mobile"
+                    style="display:block;width:100%;aspect-ratio:335/414;overflow:hidden;position:relative;background:#ebebeb;">
                     <img src="./img/23.webp"
                         style="position:absolute;top:0;left:0;width:100%;height:auto;will-change:transform;"
                         loading="lazy" decoding="async">

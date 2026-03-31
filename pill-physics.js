@@ -1,7 +1,13 @@
 /**
  * pill-physics.js
- * Loaded with defer after matter.min.js — both scripts are deferred so they
- * execute in order after the DOM is ready.
+ * Loaded dynamically after Matter.js — via IntersectionObserver in index.html.
+ *
+ * Behaviour:
+ *  - On page load: icons shown in settled (resting) position, no animation.
+ *  - Scroll DOWN to section: icons reset to top and fall — physics runs ~2 s then pauses.
+ *  - Scroll UP to section: icons already at rest, no fall animation.
+ *  - Mouse hover / touch: physics resumes for repulsion; pauses 1.5 s after interaction ends.
+ *  - Tab hidden: animation paused; resumes only on next interaction or fall trigger.
  */
 (function () {
     'use strict';
@@ -46,7 +52,7 @@
         return new Promise(function (resolve) {
             var img = new Image();
             img.onload  = function () { resolve(img); };
-            img.onerror = function () { resolve(img); }; // never block on error
+            img.onerror = function () { resolve(img); };
             img.src = src;
         });
     })).then(startPhysics);
@@ -83,53 +89,31 @@
         }
         Composite.add(engine.world, walls);
 
-        /* icon bodies */
+        /* icon bodies — initial grid positions at top */
         var bodies = Array.from({ length: N }, function (_, i) {
             var col = i % 3, row = Math.floor(i / 3);
             var x = W * 0.18 + col * (W * 0.32) + (Math.random() - 0.5) * 8;
             var y = CR * 0.5  + row * (IMG_R * 2.8) + (Math.random() - 0.5) * 6;
-            var b = Bodies.circle(x, y, IMG_R, {
+            return Bodies.circle(x, y, IMG_R, {
                 restitution: 0.55, friction: 0.04, frictionAir: 0.01, density: 0.003,
             });
-            Body.setVelocity(b, { x: (Math.random() - 0.5) * 1.5, y: Math.random() * 2 });
-            return b;
         });
         Composite.add(engine.world, bodies);
 
-        /* mouse / touch */
-        var mx = -9999, my = -9999;
-
-        cv.addEventListener('mousemove', function (e) {
-            var r = cv.getBoundingClientRect();
-            mx = (e.clientX - r.left) * (W / r.width);
-            my = (e.clientY - r.top)  * (H / r.height);
+        /* store initial (top) positions for fall reset */
+        var topPositions = bodies.map(function (b) {
+            return { x: b.position.x, y: b.position.y };
         });
-        cv.addEventListener('mouseleave', function () { mx = -9999; my = -9999; });
 
-        if (cvM) {
-            function touchPos(e) {
-                var r = cvM.getBoundingClientRect();
-                var t = e.touches[0] || e.changedTouches[0];
-                return {
-                    x: (t.clientX - r.left) * (W / r.width),
-                    y: (t.clientY - r.top)  * (H / r.height),
-                };
-            }
-            cvM.addEventListener('touchstart', function (e) {
-                e.preventDefault();
-                var p = touchPos(e); mx = p.x; my = p.y;
-            }, { passive: false });
-            cvM.addEventListener('touchmove', function (e) {
-                e.preventDefault();
-                var p = touchPos(e); mx = p.x; my = p.y;
-            }, { passive: false });
-            cvM.addEventListener('touchend', function () { mx = -9999; my = -9999; });
-        }
+        /* ── pre-settle silently so first draw shows icons at rest ── */
+        for (var ps = 0; ps < 300; ps++) Engine.update(engine, 16);
 
-        /* animation loop — pauses when tab is hidden */
-        var REPEL_R = 80, REPEL_K = 0.32;
-        var lastT = performance.now();
-        var rafId = null;
+        /* ── tick / stop helpers ── */
+        var rafId    = null;
+        var stopTimer = null;
+        var lastT    = performance.now();
+        var mx = -9999, my = -9999;
+        var REPEL_R = 80, REPEL_K = 0.32, MAX_V = 14;
 
         function tick(now) {
             var dt = Math.min(now - lastT, 50);
@@ -149,15 +133,13 @@
 
             Engine.update(engine, dt);
 
-            // Cap velocity to prevent tunnelling through walls on fast touch
-            var MAX_V = 14;
-            for (var j2 = 0; j2 < bodies.length; j2++) {
-                var b2 = bodies[j2];
-                var spd = Math.hypot(b2.velocity.x, b2.velocity.y);
+            var j2, b2, spd;
+            for (j2 = 0; j2 < bodies.length; j2++) {
+                b2 = bodies[j2];
+                spd = Math.hypot(b2.velocity.x, b2.velocity.y);
                 if (spd > MAX_V) {
                     Body.setVelocity(b2, { x: b2.velocity.x / spd * MAX_V, y: b2.velocity.y / spd * MAX_V });
                 }
-                // Rescue bodies that escaped the pill bounds
                 if (b2.position.x < -IMG_R || b2.position.x > W + IMG_R ||
                     b2.position.y < -IMG_R || b2.position.y > H + IMG_R) {
                     Body.setPosition(b2, { x: W / 2, y: H * 0.35 });
@@ -171,21 +153,127 @@
             rafId = requestAnimationFrame(tick);
         }
 
-        /* pause / resume on tab visibility */
-        document.addEventListener('visibilitychange', function () {
-            if (document.hidden) {
-                cancelAnimationFrame(rafId);
-                rafId = null;
-            } else if (!rafId) {
-                lastT = performance.now(); // reset clock to avoid large dt on resume
-                rafId = requestAnimationFrame(tick);
+        function startTick() {
+            if (stopTimer) { clearTimeout(stopTimer); stopTimer = null; }
+            if (rafId) return;
+            lastT = performance.now();
+            rafId = requestAnimationFrame(tick);
+        }
+
+        function stopTick() {
+            if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+            drawTo(ctx);
+            if (ctxM) drawTo(ctxM);
+        }
+
+        function scheduleStop(ms) {
+            if (stopTimer) clearTimeout(stopTimer);
+            stopTimer = setTimeout(stopTick, ms || 1500);
+        }
+
+        /* reset bodies to top for fall animation */
+        function resetToTop() {
+            for (var i = 0; i < bodies.length; i++) {
+                var p = topPositions[i];
+                Body.setPosition(bodies[i], {
+                    x: p.x + (Math.random() - 0.5) * 8,
+                    y: p.y + (Math.random() - 0.5) * 6,
+                });
+                Body.setVelocity(bodies[i], { x: (Math.random() - 0.5) * 1.5, y: Math.random() * 2 });
+                Body.setAngularVelocity(bodies[i], 0);
             }
+        }
+
+        /* ── scroll direction tracking ── */
+        var scrollDir = 'down';
+        var lastScrollY = window.scrollY;
+        window.addEventListener('scroll', function () {
+            var y = window.scrollY;
+            scrollDir = (y >= lastScrollY) ? 'down' : 'up';
+            lastScrollY = y;
+        }, { passive: true });
+
+        /* ── IntersectionObserver — fall on scroll-down entry only ── */
+        var wasVisible = false;
+        var triggers = cvM ? [cv, cvM] : [cv];
+
+        var visIO = new IntersectionObserver(function (entries) {
+            var isVisible = entries.some(function (e) { return e.isIntersecting; });
+
+            if (isVisible && !wasVisible) {
+                if (scrollDir === 'down') {
+                    /* entered by scrolling down — play fall animation */
+                    resetToTop();
+                    startTick();
+                    scheduleStop(2000);
+                }
+                /* scrolled up to section — icons already settled, no animation */
+            } else if (!isVisible && wasVisible) {
+                /* left viewport — stop physics */
+                if (stopTimer) { clearTimeout(stopTimer); stopTimer = null; }
+                stopTick();
+            }
+
+            wasVisible = isVisible;
+        }, { threshold: 0.1 });
+
+        triggers.forEach(function (t) { visIO.observe(t); });
+
+        /* ── mouse interaction ── */
+        cv.addEventListener('mouseenter', function () {
+            if (stopTimer) { clearTimeout(stopTimer); stopTimer = null; }
+            startTick();
+        });
+        cv.addEventListener('mouseleave', function () {
+            mx = -9999; my = -9999;
+            scheduleStop(1500);
+        });
+        cv.addEventListener('mousemove', function (e) {
+            var r = cv.getBoundingClientRect();
+            mx = (e.clientX - r.left) * (W / r.width);
+            my = (e.clientY - r.top)  * (H / r.height);
         });
 
-        lastT = performance.now();
-        rafId = requestAnimationFrame(tick);
+        /* ── touch interaction (mobile) ── */
+        if (cvM) {
+            function touchPos(e) {
+                var r = cvM.getBoundingClientRect();
+                var t = e.touches[0] || e.changedTouches[0];
+                return {
+                    x: (t.clientX - r.left) * (W / r.width),
+                    y: (t.clientY - r.top)  * (H / r.height),
+                };
+            }
+            cvM.addEventListener('touchstart', function (e) {
+                e.preventDefault();
+                if (stopTimer) { clearTimeout(stopTimer); stopTimer = null; }
+                startTick();
+                var p = touchPos(e); mx = p.x; my = p.y;
+            }, { passive: false });
+            cvM.addEventListener('touchmove', function (e) {
+                e.preventDefault();
+                var p = touchPos(e); mx = p.x; my = p.y;
+            }, { passive: false });
+            cvM.addEventListener('touchend', function () {
+                mx = -9999; my = -9999;
+                scheduleStop(1500);
+            });
+        }
 
-        /* draw helpers */
+        /* ── pause on tab hidden ── */
+        document.addEventListener('visibilitychange', function () {
+            if (document.hidden) {
+                if (stopTimer) { clearTimeout(stopTimer); stopTimer = null; }
+                stopTick();
+            }
+            /* on tab return: no auto-resume — user re-triggers by hovering/scrolling */
+        });
+
+        /* ── initial static draw (settled icons, no movement) ── */
+        drawTo(ctx);
+        if (ctxM) drawTo(ctxM);
+
+        /* ── draw helpers ── */
         function drawTo(c) {
             c.clearRect(0, 0, W, H);
             c.save();
