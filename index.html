@@ -523,15 +523,18 @@
                 <img src="./img/17.webp"
                     style="position:absolute;left:0;top:0;width:757px;height:491px;object-fit:cover;border-radius:32px;"
                     loading="lazy" decoding="async">
-                <img src="./img/18.webp"
-                    style="position:absolute;left:757px;top:0;width:203px;height:318px;object-fit:cover;border-radius:1000px;"
-                    loading="lazy" decoding="async">
+                <div class="face-canvas-wrap"
+                    style="position:absolute;left:757px;top:0;width:203px;height:318px;border-radius:1000px;overflow:hidden;background:#0d0520;">
+                    <noscript><img src="./img/18.webp" style="width:100%;height:100%;object-fit:cover;"></noscript>
+                </div>
             </div>
             <div class="nm-floor-mobile">
                 <img src="./img/17.webp" class="nm-mobile-img" style="aspect-ratio:3744/2433;border-radius:32px;"
                     loading="lazy">
-                <img src="./img/18.webp" class="nm-mobile-img"
-                    style="aspect-ratio:203/318;border-radius:1000px;width:54%;margin-left:auto;" loading="lazy">
+                <div class="face-canvas-wrap nm-mobile-img"
+                    style="aspect-ratio:203/318;border-radius:1000px;width:54%;margin-left:auto;overflow:hidden;background:#0d0520;">
+                    <noscript><img src="./img/18.webp" style="width:100%;height:100%;object-fit:cover;"></noscript>
+                </div>
             </div>
         </div>
 
@@ -785,6 +788,8 @@
     </script>
 
     <script src="./transitions.js" defer></script>
+    <script src="./face-model-data.js" defer></script>
+    <script src="./face-dots.js" defer></script>
 
     <!-- ── Pill physics — loaded only when canvas enters viewport ── -->
     <script>
