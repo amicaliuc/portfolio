@@ -30,6 +30,31 @@
             max-width: 700px;
         }
 
+        /* ── Contact row under tagline ── */
+        .contact-row {
+            display: flex;
+            gap: 24px;
+            margin-top: 20px;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: clamp(20px, 4vw, 26px);
+            font-weight: 500;
+            color: #0b0b0b;
+            text-decoration: underline;
+            text-decoration-color: rgba(0,0,0,0.15);
+            text-decoration-thickness: 1px;
+            text-underline-offset: 4px;
+            transition: opacity 0.2s ease;
+        }
+
+        @media (hover: hover) {
+            .contact-link:hover { opacity: 0.65; }
+        }
+
         /* ── Section anchor links ── */
         .nav-links {
             display: flex;
@@ -286,6 +311,18 @@
             Square for Franchises ($&#10074;&#10074;&#10074;.6M GPV platform) &amp;&nbsp;GoParrot ($&#10074;&#10074;M
             exit).
         </h3>
+
+        <!-- ── Contact row ── -->
+        <div class="contact-row">
+            <a href="mailto:ihoodstar@gmail.com?subject=Let's talk about design" class="contact-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Say hello
+            </a>
+            <a href="https://www.linkedin.com/in/anatolie-micaliuc/" target="_blank" rel="noopener" class="contact-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                Connect on LinkedIn
+            </a>
+        </div>
 
         <!-- ════════════════ SECTION 1 ════════════════ -->
         <div class="nm-section-header">
@@ -623,7 +660,7 @@
                 <img src="./img/27.webp" class="nm-mobile-img"
                     style="aspect-ratio:240/328;border-radius:32px;width:50%;margin-left:auto;" loading="lazy">
             </div>
-            <p class="nm-below-caption" style="margin-left:25%;">ATM Redesign. Humanizing banking hardware</p>
+            <p class="nm-below-caption" style="margin-left:25%;">ATM redesign concept. Humanizing banking hardware</p>
         </div>
 
     </div><!-- /nm-content -->
