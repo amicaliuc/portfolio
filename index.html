@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Main — Anatolie Micaliuc</title>
+    <title>Anatolie Micaliuc – product designer with 8+ years of experience in B2B SaaS</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon.png">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
@@ -33,14 +33,12 @@
         /* ── Contact row under tagline ── */
         .contact-row {
             display: flex;
-            gap: 24px;
+            align-items: baseline;
+            gap: 10px;
             margin-top: 20px;
         }
 
         .contact-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
             font-size: clamp(20px, 4vw, 26px);
             font-weight: 500;
             color: #0b0b0b;
@@ -51,8 +49,19 @@
             transition: opacity 0.2s ease;
         }
 
+        .contact-sep {
+            font-size: clamp(20px, 4vw, 26px);
+            font-weight: 500;
+            color: #0b0b0b;
+            opacity: 0.3;
+        }
+
+        .contact-plain {
+            text-decoration: none;
+        }
+
         @media (hover: hover) {
-            .contact-link:hover { opacity: 0.65; }
+            a.contact-link:hover { opacity: 0.65; }
         }
 
         /* ── Section anchor links ── */
@@ -314,14 +323,11 @@
 
         <!-- ── Contact row ── -->
         <div class="contact-row">
-            <a href="mailto:ihoodstar@gmail.com?subject=Let's talk about design" class="contact-link">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                Say hello
-            </a>
-            <a href="https://www.linkedin.com/in/anatolie-micaliuc/" target="_blank" rel="noopener" class="contact-link">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                Connect on LinkedIn
-            </a>
+            <a href="mailto:ihoodstar@gmail.com?subject=Let's talk about design" class="contact-link">Email</a>
+            <span class="contact-sep">·</span>
+            <a href="https://www.linkedin.com/in/anatolie-micaliuc/" target="_blank" rel="noopener" class="contact-link">LinkedIn</a>
+            <span class="contact-sep">·</span>
+            <span class="contact-link contact-plain">Moldova, Chisinau · Open to remote</span>
         </div>
 
         <!-- ════════════════ SECTION 1 ════════════════ -->
